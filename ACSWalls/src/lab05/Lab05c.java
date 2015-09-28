@@ -14,6 +14,36 @@ public class Lab05c
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter a word :: ");
 		String word = scan.nextLine();
+		StringOddOrEven www = new StringOddOrEven(word);
+		System.out.println(www+" is "+www.isEven());
 		
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
+		System.out.print("Enter a word :: ");
+		word = scan.nextLine();
+		www.setString(word);
+		System.out.println(www+" is "+www.isEven());
 	}
 }
