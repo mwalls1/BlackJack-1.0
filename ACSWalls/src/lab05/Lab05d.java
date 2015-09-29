@@ -1,4 +1,4 @@
-//© A+ Computer Science  -  www.apluscompsci.com
+package lab05;
 //Name -
 //Date -
 //Class -
