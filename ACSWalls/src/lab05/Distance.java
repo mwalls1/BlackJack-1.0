@@ -1,4 +1,4 @@
-//� A+ Computer Science  -  www.apluscompsci.com
+package lab05;
 //Name -
 //Date -
 //Class -
@@ -39,10 +39,15 @@ public class Distance
 	public String determineClosest( )
 	{
 		double distanceA = 0.0, distanceB = 0.0;
-		String result=0;
-		distanceA = Math.sqrt(Math.pow(x2-0,2)+Math.pow(y2-0,2));
-		distanceB = Math.sqrt(Math.pow(x1-0,2)+Math.pow(y1-0,2));
-		
+		String result="";
+		distanceB = Math.sqrt(Math.pow(x2-0,2)+Math.pow(y2-0,2));
+		distanceA = Math.sqrt(Math.pow(x1-0,2)+Math.pow(y1-0,2));
+		if(distanceA>distanceB)
+			result+="distance B is closer.";
+		else if(distanceB>distanceA)
+			result+="distance A is closer";
+		else
+			result+="they are the same distance away from the center";
 
 
 
