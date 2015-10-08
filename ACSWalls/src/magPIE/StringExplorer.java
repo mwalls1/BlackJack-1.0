@@ -28,11 +28,14 @@ public class StringExplorer
 		System.out.println ("After toLowerCase(), sample = " + sample);
 		
 		//  Try other methods here:
-		String strr = "Computer Science is the best, the greatest, and the most wonderful subject to study!"; 
-		int number = 0;
-		for(int i = 0;i<strr.length();i++)
-			i = 
-					number++;
+		String statement = "Computer Science is the best, the greatest, and the most wonderful subject to study!"; 
+		int index = statement.indexOf("the",0);
+		while(index!=-1)
+		{
+			System.out.println("the is found at the position: "+index);
+			index = statement.indexOf("the",index+1);
+		}
+
 	}
 
 }
