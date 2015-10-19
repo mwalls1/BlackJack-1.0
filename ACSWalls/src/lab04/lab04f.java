@@ -1,9 +1,10 @@
 package lab04;
+import java.io.IOException;
 import java.util.*;
+
 public class lab04f {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args)throws IOException{
 		String yn = "";
 		do
 		{
@@ -14,10 +15,10 @@ public class lab04f {
 		String last = scan.nextLine();
 		System.out.print("What is your favorite sport?: ");
 		String sport = scan.nextLine();
-		NameChanger change = new NameChanger(first,last);
+		NameChanger change = new NameChanger(first,last,sport);
 		change.scramble();
 		change.reverse();
-		System.out.println(change.toString()+"\n\nFavorite sport: "+sport);
+		System.out.println(change);
 		System.out.println("Continue? (y/n)");
 		yn = scan.nextLine();
 		}while(yn.equals("y"));

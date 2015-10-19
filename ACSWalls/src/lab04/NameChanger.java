@@ -4,29 +4,43 @@ package lab04;
 //Date -
 //Class -
 //Lab  -
-
-import static java.lang.System.*;
+import com.gtranslate.Audio;
+import com.gtranslate.Language;
+import com.gtranslate.Translator;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import javax.swing.JOptionPane;
+import java.io.IOException;
 
 public class NameChanger {
+	//Translator translate = Translator.getInstance();
+	Translator translate;
+	String translatedText = new String();
 	String first = "";
 	String last = "";
-	int firstt;
+	String sport = "";
 	int[] asci;
 	char[] charr;
 
-	public NameChanger(String f, String l) {
+	public NameChanger(String f, String l, String spor) throws IOException {
 		first = f;
 		last = l;
+		sport = spor;
 		charr = new char[first.length() - 1];
 		asci = new int[first.length() - 1];
 
 		for (int i = 0; i < first.length() - 1; i++) {
 			charr[i] = first.charAt(i);
 			asci[i] = (int) charr[i];
-			firstt += asci[i];
 		}
 
 	}
+	public Translate(com.google.api.client.http.HttpTransport transport,com.google.api.client.json.JsonFactory jsonFactory,com.google.api.client.http.HttpRequestInitializer httpRequestInitializer)
+	{
+		
+	}
+
 
 	public void scramble() {
 		last = last.replace(last.charAt(last.length() - 1), 'z');
@@ -35,6 +49,10 @@ public class NameChanger {
 	public void setNames(String f, String l) {
 		first = f;
 		last = l;
+		for (int i = 0; i < first.length() - 1; i++) {
+			charr[i] = first.charAt(i);
+			asci[i] = (int) charr[i];
+		}
 	}
 
 	public void reverse() {
@@ -50,13 +68,32 @@ public class NameChanger {
 
 	}
 
-	public String toString() {
-		String out = "";
-		for (int i = 0; i < asci.length; i++) {
-			System.out.print(asci[i]);
-		}
-		out += "\n\nLast name: " + last;
-		return out;
+	private void showError(String err) {
+		JOptionPane.showMessageDialog(null, "Unfortunately there is an error: \n" + err, "Error reading the text",
+				JOptionPane.WARNING_MESSAGE);
 	}
 
+	public String toString() {
+		String out = "";
+		for (int i = 0; i < asci.length; i++)
+			System.out.print(asci[i]);
+		try {
+			try {
+				translatedText = translate.translate(sport, Language.ENGLISH, Language.HEBREW);
+
+			} catch (IllegalArgumentException ex) {
+				showError(ex.toString());
+
+			} catch (SecurityException ex) {
+				showError(ex.toString());
+			}
+			out += "\n\nLast name: " + last + "\n\nSport:" + translatedText;
+			return out;
+		} finally {
+
+		}
+
+		// TODO Auto-generated method stub
+
+	}
 }
