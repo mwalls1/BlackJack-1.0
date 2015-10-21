@@ -36,10 +36,6 @@ public class NameChanger {
 		}
 
 	}
-	public Translate(com.google.api.client.http.HttpTransport transport,com.google.api.client.json.JsonFactory jsonFactory,com.google.api.client.http.HttpRequestInitializer httpRequestInitializer)
-	{
-		
-	}
 
 
 	public void scramble() {
@@ -77,23 +73,11 @@ public class NameChanger {
 		String out = "";
 		for (int i = 0; i < asci.length; i++)
 			System.out.print(asci[i]);
-		try {
-			try {
-				translatedText = translate.translate(sport, Language.ENGLISH, Language.HEBREW);
-
-			} catch (IllegalArgumentException ex) {
-				showError(ex.toString());
-
-			} catch (SecurityException ex) {
-				showError(ex.toString());
-			}
 			out += "\n\nLast name: " + last + "\n\nSport:" + translatedText;
 			return out;
-		} finally {
 
 		}
 
 		// TODO Auto-generated method stub
 
 	}
-}
