@@ -18,6 +18,7 @@ public class getForecast
 	private String temperature = "";
 	private String visibility = "";
 	private String woeid = "";
+	private String outs = "";
 	public getForecast(String add)
 	{
 		address = add;
@@ -37,21 +38,19 @@ public class getForecast
 
 		// Execute Choreo
 		GetWeatherByAddressResultSet getWeatherByAddressResults = getWeatherByAddressChoreo.execute(getWeatherByAddressInputs);
-		cond = getWeatherByAddressResults.get_ConditionText();
-		forcast = getWeatherByAddressResults.get_ForecastText();
-		hi = getWeatherByAddressResults.get_High();
-		humid = getWeatherByAddressResults.get_Humidity();
-		low = getWeatherByAddressResults.get_Low();
-		pressure = getWeatherByAddressResults.get_Pressure();
-		temperature = getWeatherByAddressResults.get_Temperature();
-		visibility = getWeatherByAddressResults.get_Visibility();
-		woeid = getWeatherByAddressResults.get_WOEID();
+		cond += getWeatherByAddressResults.get_ConditionText();
+		forcast += getWeatherByAddressResults.get_ForecastText();
+		hi += getWeatherByAddressResults.get_High();
+		humid += getWeatherByAddressResults.get_Humidity();
+		low += getWeatherByAddressResults.get_Low();
+		pressure += getWeatherByAddressResults.get_Pressure();
+		temperature += getWeatherByAddressResults.get_Temperature();
+		visibility += getWeatherByAddressResults.get_Visibility();
+		woeid += getWeatherByAddressResults.get_WOEID();
 	}
 	public String toString()
 	{
-		String output = "";
-		output+="Address: "+address+"\nCondition: "+cond+"\nForecast: "+forcast+"\nHigh: "+hi+"\nHumidity: "+humid+"\nLow: "+low+"\nPressure: "+pressure+"\nTemperature: "+temperature+"\nVisibility: "+visibility+"\nWOEID: "+woeid;
-		return output;
+		return "Address: "+address+"\nCondition: "+cond+"\nForecast: "+forcast+"\nHigh: "+hi+"\nHumidity: "+humid+"\nLow: "+low+"\nPressure: "+pressure+"\nTemperature: "+temperature+"\nVisibility: "+visibility+"\nWOEID: "+woeid;
 		
 	}
 }
