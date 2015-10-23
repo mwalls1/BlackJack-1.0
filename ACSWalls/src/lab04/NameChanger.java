@@ -4,9 +4,6 @@ package lab04;
 //Date -
 //Class -
 //Lab  -
-import com.gtranslate.Audio;
-import com.gtranslate.Language;
-import com.gtranslate.Translator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -15,7 +12,6 @@ import java.io.IOException;
 
 public class NameChanger {
 	//Translator translate = Translator.getInstance();
-	Translator translate;
 	String translatedText = new String();
 	String first = "";
 	String last = "";
