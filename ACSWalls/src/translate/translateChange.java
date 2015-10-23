@@ -9,9 +9,11 @@ import com.temboo.core.TembooSession;
 public class translateChange {
 	private String text = "";
 	private String tranText = "";
-	public translateChange(String s)
+	private String language = "";
+	public translateChange(String s, String l)
 	{
 		text = s;
+		language = l;
 	}
 	public void translate() throws TembooException
 	{
@@ -26,7 +28,7 @@ public class translateChange {
 		// Set inputs
 		translateInputs.set_Text(text);
 		translateInputs.set_ClientSecret("translatorACS1234567");
-		translateInputs.set_To("ar");
+		translateInputs.set_To(language);
 		translateInputs.set_ClientID("1mwalls");
 		translateInputs.set_From("en");
 
