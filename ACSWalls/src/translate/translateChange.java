@@ -36,6 +36,10 @@ public class translateChange {
 		TranslateResultSet translateResults = translateChoreo.execute(translateInputs);
 		tranText = translateResults.get_TranslatedText();
 	}
+	public String getTrans()
+	{
+		return tranText;
+	}
 	public String toString()
 	{
 		String output = "";
