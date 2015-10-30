@@ -27,7 +27,7 @@ public class Magpie5
 	Scanner scan = new Scanner (System.in);
 	public String getGreeting()
 	{
-		return "Hello, let's talk.";
+		return "Hello, let's talk. ";
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Magpie5
 		}
 		else if (findKeyword(statement, "weather", 0)>=0)
 		{
-			System.out.print("Hmm, weather. Whats your address?");
+			System.out.print("Hmm, weather. Whats your address? ");
 			response = getWeather(scan.nextLine());
 		}
 
