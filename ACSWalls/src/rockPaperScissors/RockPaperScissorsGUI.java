@@ -27,7 +27,7 @@ public class RockPaperScissorsGUI extends JFrame
 
 		//Get content pane
 		content=getContentPane();
-		content.setBackground(Color.blue.darker().darker());
+		content.setBackground(new Color(0,0,1));
 		
 		//Set layout
 		content.setLayout(new GridLayout(3,2));
