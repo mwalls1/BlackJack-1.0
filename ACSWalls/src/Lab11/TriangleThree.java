@@ -39,12 +39,16 @@ public class TriangleThree
 		String output="";
 		for(int i = 0;i<=size;i++)
 		{
-			for(int j = 0;j<i;j++)
-			{
-				output+=letter;
-			}
+				for(int whatever = 0; whatever < (size-i); whatever ++)
+				{
+					output+=" ";
+				}
+				for(int whatever = 0; whatever < (i); whatever ++)
+				{
+					output+=letter;
+				}
 			output+= "\n";
-		}
+	}
 		return output;
 	}
 }
