@@ -29,14 +29,14 @@ public class GUItran extends JFrame
 		setTitle(TITLE);
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setAlwaysOnTop(true);
 		//Get content pane
 		content=getContentPane();
-		content.setBackground(Color.blue.darker().darker());
+		content.setBackground(new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
 		
 		//Set layout
 		content.setLayout(new GridLayout(3,2));
-
+		content.setCursor(new Cursor(4));
 		//Create labels
 		player1Label=new JLabel("Enter text to translate", SwingConstants.CENTER);
 		player1Label.setForeground(Color.white);
