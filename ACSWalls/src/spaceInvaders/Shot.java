@@ -1,5 +1,9 @@
 package spaceInvaders;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 /**
  *
  */
@@ -16,6 +20,7 @@ public class Shot implements Runnable {
     boolean shotState = true;
 
     AlienArmy alienArmy = null;
+    private Image shotImage = null;
 
     /**
      *

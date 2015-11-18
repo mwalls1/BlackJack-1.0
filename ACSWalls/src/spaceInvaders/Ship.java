@@ -14,8 +14,9 @@ public class Ship implements MouseListener, MouseMotionListener {
   public static int SHIP_HEIGHT = 25;
   public static int SHIP_WIDTH = 15;
 
-  private int x = 0;
+  private int x = 25;
   private int heightPosition = 0;
+  private Image shipImage = null;
 
   SpaceInvaders spaceInvaders = null;
 
@@ -27,8 +28,9 @@ public class Ship implements MouseListener, MouseMotionListener {
   /**
    *
    */
-  public Ship(SpaceInvaders si) {
+  public Ship(SpaceInvaders si, Image ai) {
       spaceInvaders = si;
+      shipImage = ai;
       //Dynamically work out the starting position of the ship
       x = (int)((SpaceInvaders.WIDTH/2)+(SHIP_WIDTH/2));
       heightPosition = SpaceInvaders.HEIGHT-SHIP_HEIGHT-20;
@@ -96,7 +98,7 @@ public class Ship implements MouseListener, MouseMotionListener {
    */ 
   public void drawShip(Graphics g) {
       g.setColor(Color.yellow);
-      g.fillRect(x, heightPosition, SHIP_WIDTH, SHIP_HEIGHT);
+      g.drawImage(shipImage, x-7, heightPosition, null);
       //If the shot is still alive, i.e. still on the screen
       if ((shot != null) && (shot.getShotState())) {
           shot.drawShot(g);

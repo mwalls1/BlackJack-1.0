@@ -8,7 +8,7 @@ import java.awt.*;
 public class Alien {
 
     public static int ALIEN_HEIGHT = 25;
-    public static int ALIEN_WIDTH  = 15;   
+    public static int ALIEN_WIDTH  = 38;   
 
     private int leftPosition = 0;
     private int heightPosition = 0;
@@ -87,8 +87,7 @@ public class Alien {
      */    
     public void drawAlien(Graphics g) {
         if (!hitState) {
-        	 g.setColor(Color.red);
-             g.fillRect(leftPosition, heightPosition, ALIEN_WIDTH, ALIEN_HEIGHT);
+             g.drawImage(alienImage,leftPosition, heightPosition,null);
 	}
     }    
 

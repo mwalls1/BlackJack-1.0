@@ -1,8 +1,12 @@
 package spaceInvaders;
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 /**
  *
  */
@@ -18,25 +22,37 @@ public class SpaceInvaders extends JFrame implements Runnable {
 
     private boolean paused = false;
 
-    private int score = 0;
+    private int score = 3;
 
     Graphics offscreen_high;
     BufferedImage offscreen;
 
     Image backGroundImage = null;
     Image alienImage = null; 
+    Image shipImage = null;
+    
     /**
      * This is called a constructor. 
      */
     public SpaceInvaders(String frameTitle) {
+    	
         super(frameTitle);
-
-        backGroundImage = new ImageIcon("back3.jpg").getImage();
-
-        alienImage = new ImageIcon("alien.jpg").getImage();
+        try {
+        	alienImage = ImageIO.read(new File(
+    					"res/alienFull.jpg"));
+ 
+    		backGroundImage = ImageIO.read(new File(
+    					"res/back3.jpg"));
+    		shipImage = ImageIO.read(new File(
+    					"res/ship.png"));
+    				
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
 
         //Create the ship to fight off the invading army!
-        ship = new Ship(this);
+        ship = new Ship(this,shipImage);
 
         //Create the alien army
         army = new AlienArmy(ship, this, alienImage);
@@ -76,8 +92,8 @@ public class SpaceInvaders extends JFrame implements Runnable {
      * Get shot and loose 20 points!
      */
     public void shotShip() {
-        score -= 20;
-        System.out.println("Current Score = "+score);
+    	score-=1;
+        System.out.println("Current Lives = "+score);
     }
 
     /**
