@@ -91,9 +91,6 @@ public class Alien {
      *
      */    
     public void drawAlien(Graphics g) {
-    	if(hitState)
-    		g.drawImage(bomb, leftPosition, heightPosition,40,40, null);
-    		g.draw
         if (!hitState) {
              g.drawImage(alienImage,leftPosition, heightPosition,40,40,null);
 	}
