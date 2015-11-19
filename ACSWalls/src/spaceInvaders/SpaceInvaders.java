@@ -21,9 +21,10 @@ public class SpaceInvaders extends JFrame implements Runnable {
     Ship ship = null;
 
     private boolean paused = false;
-
-    private int score = 3;
-
+	private Container content;
+    private int score = 0;
+    private int health = 3;
+	private JLabel scoreLabel;
     Graphics offscreen_high;
     BufferedImage offscreen;
 
@@ -64,9 +65,12 @@ public class SpaceInvaders extends JFrame implements Runnable {
 
         offscreen = new BufferedImage(WIDTH, HEIGHT,BufferedImage.TYPE_INT_RGB);
         offscreen_high = offscreen.createGraphics();
+        scoreLabel=new JLabel("Score", SwingConstants.CENTER);
+		scoreLabel.setForeground(Color.white);
 
         setBackground(Color.black);
         setSize(WIDTH, HEIGHT);
+        add(scoreLabel);
         setVisible(true);
         startGame();
     }
@@ -92,8 +96,12 @@ public class SpaceInvaders extends JFrame implements Runnable {
      * Get shot and loose 20 points!
      */
     public void shotShip() {
-    	score-=1;
-        System.out.println("Current Lives = "+score);
+    	health-=1;
+        System.out.println("Current Lives = "+health);
+    }
+    public int getHP()
+    {
+    	return health;
     }
 
     /**
@@ -121,7 +129,8 @@ public class SpaceInvaders extends JFrame implements Runnable {
     }
 
     public void update(Graphics g) {
-        paint(g);
+        	paint(g);
+        	
     }
 
     /**
@@ -136,13 +145,27 @@ public class SpaceInvaders extends JFrame implements Runnable {
      */
     public void run() {
         int count = 0;
-        while(true) {
+        while(health>0&&true) {
             try {
                 Thread.sleep(gameSpeed);
             } catch(InterruptedException ie) {
                 //Ignore this exception
             }
             //If the game is currently running, move the aliens
+            if(health==0)
+            {
+            	JLabel gameOver = new JLabel("GAME OVER", JLabel.CENTER);
+            	dispose();
+            	JFrame frame = new JFrame();
+            	frame.setTitle("Game Over");
+            	frame.setSize(WIDTH, HEIGHT);
+            	frame.getContentPane().setBackground(Color.black);
+            	frame.getContentPane().add(gameOver);
+            	gameOver.setForeground(Color.white);
+            	gameOver.setFont(new Font("ArcadeClassic",Font.PLAIN, 50));
+            	gameOver.setVisible(true);
+            	frame.setVisible(true);
+            }
             if (!paused) {
                 if (count >= 5) {
                     moveAliens();
@@ -167,6 +190,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
      */
     public static void main(String []args) {
         SpaceInvaders invaders = new SpaceInvaders("Space Invaders");
+        
     }
 
 }
