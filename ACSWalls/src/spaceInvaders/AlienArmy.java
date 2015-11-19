@@ -26,10 +26,16 @@ public class AlienArmy {
 
     private SpaceInvaders spaceInvaders;
     Image alienImage = null;
-    public AlienArmy(Ship s, SpaceInvaders si, Image ai) {
+    Image alienImage2 = null;
+    Image alienImage3 = null;
+    Image bomb = null;
+    public AlienArmy(Ship s, SpaceInvaders si, Image ai,Image ai2, Image ai3,Image b) {
         ship = s;
 	spaceInvaders = si;
 	alienImage = ai;
+	alienImage2 = ai2;
+	alienImage3 = ai3;
+	bomb = b;
 
 //	alienImage = new javax.swing.ImageIcon("alienFull.jpg").getImage();
 
@@ -44,21 +50,21 @@ public class AlienArmy {
      */
     private void createArmy() {
         //To initialise a row we can either do
-	rowOne[0] = new Alien(alienImage, spaceInvaders);
-	rowOne[1] = new Alien(alienImage, spaceInvaders);
-	rowOne[2] = new Alien(alienImage, spaceInvaders);
-	rowOne[3] = new Alien(alienImage, spaceInvaders);
-	rowOne[4] = new Alien(alienImage, spaceInvaders);
-	rowOne[5] = new Alien(alienImage, spaceInvaders);
-	rowOne[6] = new Alien(alienImage, spaceInvaders);
-	rowOne[7] = new Alien(alienImage, spaceInvaders);
-	rowOne[8] = new Alien(alienImage, spaceInvaders);
-	rowOne[9] = new Alien(alienImage, spaceInvaders);
+	rowOne[0] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[1] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[2] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[3] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[4] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[5] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[6] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[7] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[8] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[9] = new Alien(alienImage, spaceInvaders,bomb);
 
         //Or more efficently we could use a loop
 	for (int i = 0; i < 10; i++) {
-            rowTwo[i] = new Alien(alienImage, spaceInvaders);
-            rowThree[i] = new Alien(alienImage, spaceInvaders);//Finally set the third row
+            rowTwo[i] = new Alien(alienImage2, spaceInvaders,bomb);
+            rowThree[i] = new Alien(alienImage3, spaceInvaders,bomb);//Finally set the third row
 	}	
     }
 

@@ -19,6 +19,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
     AlienArmy army = null;
 
     Ship ship = null;
+    int numAliens = 30;
 
     private boolean paused = false;
 	private Container content;
@@ -29,8 +30,11 @@ public class SpaceInvaders extends JFrame implements Runnable {
     BufferedImage offscreen;
 
     Image backGroundImage = null;
-    Image alienImage = null; 
+    Image alienImage1 = null; 
+    Image alienImage2 = null; 
+    Image alienImage3 = null; 
     Image shipImage = null;
+    Image bomb = null;
     
     /**
      * This is called a constructor. 
@@ -39,13 +43,21 @@ public class SpaceInvaders extends JFrame implements Runnable {
     	
         super(frameTitle);
         try {
-        	alienImage = ImageIO.read(new File(
+        	alienImage1 = ImageIO.read(new File(
     					"res/alienFull.jpg"));
+        	alienImage2 = ImageIO.read(new File(
+					"res/alienn.png"));
+
+        	alienImage3 = ImageIO.read(new File(
+					"res/alieen.png"));
+
  
     		backGroundImage = ImageIO.read(new File(
     					"res/back3.jpg"));
     		shipImage = ImageIO.read(new File(
     					"res/ship.png"));
+    		bomb = ImageIO.read(new File(
+					"res/bomb.png"));
     				
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
@@ -56,7 +68,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
         ship = new Ship(this,shipImage);
 
         //Create the alien army
-        army = new AlienArmy(ship, this, alienImage);
+        army = new AlienArmy(ship, this, alienImage1,alienImage2,alienImage3,bomb);
 
         //The ship will be controlled by the mouse
         addMouseListener(ship);
@@ -89,6 +101,19 @@ public class SpaceInvaders extends JFrame implements Runnable {
     public void hitAlienScore() { 
         //Add 5 to the score
         score += 5;
+        numAliens--;
+        if(numAliens<21&&numAliens>19)
+        {
+        	gameSpeed = 80;
+        }
+        if(numAliens<11&&numAliens>9)
+        {
+        	gameSpeed = 60;
+        }
+        if(numAliens<9&&numAliens>0)
+        {
+        	gameSpeed = 40;
+        }
         System.out.println("Current Score = "+score);
     }
 
@@ -145,7 +170,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
      */
     public void run() {
         int count = 0;
-        while(health>0&&true) {
+        while(health>0&&true&&numAliens>0) {
             try {
                 Thread.sleep(gameSpeed);
             } catch(InterruptedException ie) {
@@ -155,16 +180,30 @@ public class SpaceInvaders extends JFrame implements Runnable {
             if(health==0)
             {
             	JLabel gameOver = new JLabel("GAME OVER", JLabel.CENTER);
-            	dispose();
             	JFrame frame = new JFrame();
             	frame.setTitle("Game Over");
             	frame.setSize(WIDTH, HEIGHT);
             	frame.getContentPane().setBackground(Color.black);
             	frame.getContentPane().add(gameOver);
             	gameOver.setForeground(Color.white);
-            	gameOver.setFont(new Font("ArcadeClassic",Font.PLAIN, 50));
+            	gameOver.setFont(new Font("ArcadeClassic",Font.PLAIN, 100));
             	gameOver.setVisible(true);
             	frame.setVisible(true);
+            	dispose();
+            }
+            if(numAliens==0&&health>0)
+            {
+            	JLabel winner = new JLabel("Winner!", JLabel.CENTER);
+            	JFrame frame = new JFrame();
+            	frame.setTitle("Game Over");
+            	frame.setSize(WIDTH, HEIGHT);
+            	frame.getContentPane().setBackground(Color.black);
+            	frame.getContentPane().add(winner);
+            	winner.setForeground(Color.white);
+            	winner.setFont(new Font("ArcadeClassic",Font.PLAIN, 100));
+            	winner.setVisible(true);
+            	frame.setVisible(true);
+            	dispose();
             }
             if (!paused) {
                 if (count >= 5) {
