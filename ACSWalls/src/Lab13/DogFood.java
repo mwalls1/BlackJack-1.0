@@ -43,7 +43,7 @@ public class DogFood {
 				cups += 7.5;
 		}
 		cups*=7;
-		amount = Math.floor(a)(cups / bag);
+		amount = Math.floor(cups / bag);
 
 	}
 
