@@ -28,14 +28,14 @@ public class AlienArmy {
     Image alienImage = null;
     Image alienImage2 = null;
     Image alienImage3 = null;
-    Image bomb = null;
+    Image bar = null;
     public AlienArmy(Ship s, SpaceInvaders si, Image ai,Image ai2, Image ai3,Image b) {
         ship = s;
 	spaceInvaders = si;
 	alienImage = ai;
 	alienImage2 = ai2;
 	alienImage3 = ai3;
-	bomb = b;
+	bar = b;
 
 //	alienImage = new javax.swing.ImageIcon("alienFull.jpg").getImage();
 
@@ -50,21 +50,21 @@ public class AlienArmy {
      */
     private void createArmy() {
         //To initialise a row we can either do
-	rowOne[0] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[1] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[2] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[3] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[4] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[5] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[6] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[7] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[8] = new Alien(alienImage, spaceInvaders,bomb);
-	rowOne[9] = new Alien(alienImage, spaceInvaders,bomb);
+	rowOne[0] = new Alien(alienImage, spaceInvaders);
+	rowOne[1] = new Alien(alienImage, spaceInvaders);
+	rowOne[2] = new Alien(alienImage, spaceInvaders);
+	rowOne[3] = new Alien(alienImage, spaceInvaders);
+	rowOne[4] = new Alien(alienImage, spaceInvaders);
+	rowOne[5] = new Alien(alienImage, spaceInvaders);
+	rowOne[6] = new Alien(alienImage, spaceInvaders);
+	rowOne[7] = new Alien(alienImage, spaceInvaders);
+	rowOne[8] = new Alien(alienImage, spaceInvaders);
+	rowOne[9] = new Alien(alienImage, spaceInvaders);
 
         //Or more efficently we could use a loop
 	for (int i = 0; i < 10; i++) {
-            rowTwo[i] = new Alien(alienImage2, spaceInvaders,bomb);
-            rowThree[i] = new Alien(alienImage3, spaceInvaders,bomb);//Finally set the third row
+            rowTwo[i] = new Alien(alienImage2, spaceInvaders);
+            rowThree[i] = new Alien(alienImage3, spaceInvaders);//Finally set the third row
 	}	
     }
 
@@ -255,15 +255,15 @@ public class AlienArmy {
 	int rnd2 = generator.nextInt(10);
 	int rnd3 = generator.nextInt(10);
 	if (!rowOne[rnd1].hasBeenHit()) {
-	    AlienShot as = new AlienShot(rowOne[rnd1].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowOne[rnd1].getYPos(), ship);
+	    AlienShot as = new AlienShot(rowOne[rnd1].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowOne[rnd1].getYPos(), ship,bar);
             alienShots.addElement(as);
 	}
 	if (!rowOne[rnd2].hasBeenHit()) {	
-	    AlienShot as = new AlienShot(rowTwo[rnd2].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowTwo[rnd2].getYPos(), ship);
+	    AlienShot as = new AlienShot(rowTwo[rnd2].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowTwo[rnd2].getYPos(), ship,bar);
             alienShots.addElement(as);
 	}
 	if (!rowOne[rnd3].hasBeenHit()) {	
-    	    AlienShot as = new AlienShot(rowThree[rnd3].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowThree[rnd3].getYPos(), ship);
+    	    AlienShot as = new AlienShot(rowThree[rnd3].getXPos()+(int)(Alien.ALIEN_WIDTH/2), rowThree[rnd3].getYPos(), ship,bar);
             alienShots.addElement(as);
 	}
     }

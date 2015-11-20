@@ -24,11 +24,14 @@ public class SpaceInvaders extends JFrame implements Runnable {
     private boolean paused = false;
 	private Container content;
     private int score = 0;
+    JLabel scoree = new JLabel("Score: "+score);
     private int health = 3;
-	private JLabel scoreLabel;
     Graphics offscreen_high;
     BufferedImage offscreen;
-
+    Barrier barrier1;
+    Barrier barrier2;
+    Barrier barrier3;
+    Image bar = null;
     Image backGroundImage = null;
     Image alienImage1 = null; 
     Image alienImage2 = null; 
@@ -58,6 +61,8 @@ public class SpaceInvaders extends JFrame implements Runnable {
     					"res/ship.png"));
     		bomb = ImageIO.read(new File(
 					"res/bomb.png"));
+    		bar = ImageIO.read(new File(
+					"res/base.png"));
     				
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
@@ -66,23 +71,20 @@ public class SpaceInvaders extends JFrame implements Runnable {
 
         //Create the ship to fight off the invading army!
         ship = new Ship(this,shipImage);
-
         //Create the alien army
         army = new AlienArmy(ship, this, alienImage1,alienImage2,alienImage3,bomb);
+        barrier1 = new Barrier(75,280,bar);
+        barrier2 = new Barrier(255,280,bar);
+        barrier3 = new Barrier(425,280,bar);
 
         //The ship will be controlled by the mouse
         addMouseListener(ship);
         //We also want mouse movement not just mouse clicks
         addMouseMotionListener(ship);
-
         offscreen = new BufferedImage(WIDTH, HEIGHT,BufferedImage.TYPE_INT_RGB);
         offscreen_high = offscreen.createGraphics();
-        scoreLabel=new JLabel("Score", SwingConstants.CENTER);
-		scoreLabel.setForeground(Color.white);
-
         setBackground(Color.black);
         setSize(WIDTH, HEIGHT);
-        add(scoreLabel);
         setVisible(true);
         startGame();
     }
@@ -102,7 +104,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
         //Add 5 to the score
         score += 5;
         numAliens--;
-        if(numAliens<21&&numAliens>19)
+        if(numAliens<21&&numAliens>11)
         {
         	gameSpeed = 80;
         }
@@ -114,7 +116,6 @@ public class SpaceInvaders extends JFrame implements Runnable {
         {
         	gameSpeed = 40;
         }
-        System.out.println("Current Score = "+score);
     }
 
     /**
@@ -123,6 +124,18 @@ public class SpaceInvaders extends JFrame implements Runnable {
     public void shotShip() {
     	health-=1;
         System.out.println("Current Lives = "+health);
+    }
+    public void hitBarrier1()
+    {
+    	barrier1.loseHP();
+    }
+    public void hitBarrier2()
+    {
+    	barrier2.loseHP();
+    }
+    public void hitBarrier3()
+    {
+    	barrier3.loseHP();
     }
     public int getHP()
     {
@@ -149,7 +162,9 @@ public class SpaceInvaders extends JFrame implements Runnable {
         army.drawArmy(offscreen_high);
 
         ship.drawShip(offscreen_high);
-
+        barrier1.drawBarriers(offscreen_high);
+        barrier2.drawBarriers(offscreen_high);
+        barrier3.drawBarriers(offscreen_high);
         g.drawImage(offscreen,0,0,this); 
     }
 
@@ -175,6 +190,8 @@ public class SpaceInvaders extends JFrame implements Runnable {
                 Thread.sleep(gameSpeed);
             } catch(InterruptedException ie) {
                 //Ignore this exception
+            	
+            	
             }
             //If the game is currently running, move the aliens
             if(health==0)
@@ -211,6 +228,8 @@ public class SpaceInvaders extends JFrame implements Runnable {
                     count = 0;
                 }
             }
+            add(scoree);
+            scoree.setVisible(true);
             repaint();//Update the screen
             count ++;
 
@@ -222,6 +241,10 @@ public class SpaceInvaders extends JFrame implements Runnable {
      */
     public AlienArmy getAlienArmy() {
         return army;
+    }
+    public Image getBase()
+    {
+    	return bar;
     }
 
     /**

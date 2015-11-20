@@ -97,7 +97,6 @@ public class Ship implements MouseListener, MouseMotionListener {
    * Draw the image of the ship
    */ 
   public void drawShip(Graphics g) {
-      g.setColor(Color.yellow);
       g.drawImage(shipImage, x-7, heightPosition, null);
       //If the shot is still alive, i.e. still on the screen
       if ((shot != null) && (shot.getShotState())) {

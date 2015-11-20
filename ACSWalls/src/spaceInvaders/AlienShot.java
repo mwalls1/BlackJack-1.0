@@ -18,16 +18,20 @@ public class AlienShot implements Runnable {
     private int shotHeight = 0;
 
     boolean shotState = true;
-
+    Image ba = null;
+    Barrier barrier1 = new Barrier(75,280,ba);
+    Barrier barrier2 = new Barrier(255,280,ba);
+    Barrier barrier3 = new Barrier(425,280,ba);
     Ship ship = null;
     
     /**
      *
      */
-    public AlienShot(int xVal, int yVal, Ship s) {
+    public AlienShot(int xVal, int yVal, Ship s,Image b) {
         x = xVal;//Set the shot direction
 	shotHeight = yVal;
 	ship = s;
+	ba = b;
 	Thread thread = new Thread(this);
 	thread.start();
     }
@@ -44,6 +48,30 @@ public class AlienShot implements Runnable {
 	    ship.hitByAlien();
 	    shotState = false;
 	    return true;
+	}
+	else if (barrier1.checkShot(x, shotHeight))
+	{
+        //We hit something!
+    System.out.println("An alien shot the barrier!");
+    barrier1.hitBarrier();
+    shotState = false;
+    return true;
+	}
+	else if (barrier2.checkShot(x, shotHeight))
+	{
+        //We hit something!
+    System.out.println("An alien shot the barrier!");
+    barrier2.hitBarrier();
+    shotState = false;
+    return true;
+	}
+	else if (barrier3.checkShot(x, shotHeight))
+	{
+        //We hit something!
+    System.out.println("An alien shot the barrier!");
+    barrier3.hitBarrier();
+    shotState = false;
+    return true;
 	}
 
         shotHeight = shotHeight + 2;

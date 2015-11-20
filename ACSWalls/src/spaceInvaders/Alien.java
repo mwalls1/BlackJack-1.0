@@ -3,6 +3,8 @@ package spaceInvaders;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
@@ -18,7 +20,6 @@ public class Alien {
     private int heightPosition = 0;
 
     private boolean hitState = false;//Whether this alien has already been shot
-    
     Image alienImage = null;
     SpaceInvaders spaceInvaders = null;
     Image bomb = null;
@@ -26,10 +27,9 @@ public class Alien {
     /**
      *
      */
-    public Alien(Image ai, SpaceInvaders si,Image b) {
+    public Alien(Image ai, SpaceInvaders si) {
         alienImage = ai;
         spaceInvaders = si;
-        bomb = b;
     }
 
     /**
@@ -54,6 +54,7 @@ public class Alien {
             if ((y >= heightPosition) && (y <= (heightPosition+ALIEN_HEIGHT))) {
                 //We shot an alien!
                 hitState = true;
+                alienImage = bomb;
                 return true;
             }
         } 
@@ -85,15 +86,12 @@ public class Alien {
     /**
      *
      */
-
-
-    /**
-     *
-     */    
-    public void drawAlien(Graphics g) {
-        if (!hitState) {
-             g.drawImage(alienImage,leftPosition, heightPosition,40,40,null);
-	}
+    public void drawAlien(Graphics g){
+        if(!hitState) 
+        {
+        	g.drawImage(alienImage,leftPosition, heightPosition,40,40,null);
+        }
+        	
     }    
 
 }
