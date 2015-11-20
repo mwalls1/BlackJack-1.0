@@ -65,10 +65,10 @@ public class Shot implements Runnable {
     public void drawShot(Graphics g) {
         if (shotState) {
             g.setColor(Color.white);
-        } else {
-            g.setColor(Color.black);
+        }else{
+        	g.setColor(Color.black);
         }
-        g.fillRect(x, shotHeight, SHOT_WIDTH, SHOT_HEIGHT);
+        g.fillRect(x, shotHeight,SHOT_WIDTH, SHOT_HEIGHT);
     }
 
     public boolean getShotState() {

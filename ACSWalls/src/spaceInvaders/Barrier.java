@@ -3,6 +3,7 @@ package spaceInvaders;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -14,11 +15,10 @@ public class Barrier
 	private int health = 100;
 	Image barrierImage = null;
 	private boolean stillAlive = true;
+	private Point[] points = new Point[4];
 	public Barrier(int a, int b, Image bar)
 	{
-		xloc = a;
-		yloc = b;
-		barrierImage = bar;
+		points[0] = new Point(a,b);
 	}
 	public void loseHP()
 	{

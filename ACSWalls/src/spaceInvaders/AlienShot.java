@@ -53,7 +53,7 @@ public class AlienShot implements Runnable {
 	{
         //We hit something!
     System.out.println("An alien shot the barrier!");
-    barrier1.hitBarrier();
+    barrier1.loseHP();
     shotState = false;
     return true;
 	}
@@ -61,7 +61,7 @@ public class AlienShot implements Runnable {
 	{
         //We hit something!
     System.out.println("An alien shot the barrier!");
-    barrier2.hitBarrier();
+    barrier2.loseHP();
     shotState = false;
     return true;
 	}
@@ -69,7 +69,7 @@ public class AlienShot implements Runnable {
 	{
         //We hit something!
     System.out.println("An alien shot the barrier!");
-    barrier3.hitBarrier();
+    barrier3.loseHP();
     shotState = false;
     return true;
 	}

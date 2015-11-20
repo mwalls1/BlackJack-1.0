@@ -1,9 +1,13 @@
 package spaceInvaders;
 
-//Needed for the mouse
-import java.awt.event.*;
 //Needed for the graphics
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Image;
+//Needed for the mouse
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 /**
 * The last defender of earth...
 *
@@ -17,7 +21,7 @@ public class Ship implements MouseListener, MouseMotionListener {
   private int x = 25;
   private int heightPosition = 0;
   private Image shipImage = null;
-
+  ArrayList<Shot> shots = new ArrayList<Shot>();
   SpaceInvaders spaceInvaders = null;
 
   //We are only going to allow one shot at a time
@@ -99,8 +103,9 @@ public class Ship implements MouseListener, MouseMotionListener {
   public void drawShip(Graphics g) {
       g.drawImage(shipImage, x-7, heightPosition, null);
       //If the shot is still alive, i.e. still on the screen
-      if ((shot != null) && (shot.getShotState())) {
-          shot.drawShot(g);
+      if((shot!=null)&&shot.getShotState())
+      {
+    	  shot.drawShot(g);
       }
   }
 
