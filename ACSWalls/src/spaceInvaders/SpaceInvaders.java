@@ -73,9 +73,9 @@ public class SpaceInvaders extends JFrame implements Runnable {
         ship = new Ship(this,shipImage);
         //Create the alien army
         army = new AlienArmy(ship, this, alienImage1,alienImage2,alienImage3,bomb);
-        barrier1 = new Barrier(75,280,bar);
-        barrier2 = new Barrier(255,280,bar);
-        barrier3 = new Barrier(425,280,bar);
+        barrier1 = new Barrier(75,280);
+        barrier2 = new Barrier(255,280);
+        barrier3 = new Barrier(425,280);
 
         //The ship will be controlled by the mouse
         addMouseListener(ship);
@@ -124,22 +124,6 @@ public class SpaceInvaders extends JFrame implements Runnable {
     public void shotShip() {
     	health-=1;
         System.out.println("Current Lives = "+health);
-    }
-    public void hitBarrier1()
-    {
-    	barrier1.loseHP();
-    }
-    public void hitBarrier2()
-    {
-    	barrier2.loseHP();
-    }
-    public void hitBarrier3()
-    {
-    	barrier3.loseHP();
-    }
-    public int getHP()
-    {
-    	return health;
     }
 
     /**

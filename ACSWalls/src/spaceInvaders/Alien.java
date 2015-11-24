@@ -54,7 +54,6 @@ public class Alien {
             if ((y >= heightPosition) && (y <= (heightPosition+ALIEN_HEIGHT))) {
                 //We shot an alien!
                 hitState = true;
-                alienImage = bomb;
                 return true;
             }
         } 

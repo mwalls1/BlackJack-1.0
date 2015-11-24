@@ -19,9 +19,9 @@ public class AlienShot implements Runnable {
 
     boolean shotState = true;
     Image ba = null;
-    Barrier barrier1 = new Barrier(75,280,ba);
-    Barrier barrier2 = new Barrier(255,280,ba);
-    Barrier barrier3 = new Barrier(425,280,ba);
+    Barrier barrier1 = new Barrier(75,280);
+    Barrier barrier2 = new Barrier(255,280);
+    Barrier barrier3 = new Barrier(425,280);
     Ship ship = null;
     
     /**
@@ -49,32 +49,13 @@ public class AlienShot implements Runnable {
 	    shotState = false;
 	    return true;
 	}
-	else if (barrier1.checkShot(x, shotHeight))
+    shotHeight = shotHeight + 2;
+	if(barrier1.checkShot(x, shotHeight)&&!barrier1.getHitState())
 	{
-        //We hit something!
-    System.out.println("An alien shot the barrier!");
-    barrier1.loseHP();
-    shotState = false;
-    return true;
-	}
-	else if (barrier2.checkShot(x, shotHeight))
-	{
-        //We hit something!
-    System.out.println("An alien shot the barrier!");
-    barrier2.loseHP();
-    shotState = false;
-    return true;
-	}
-	else if (barrier3.checkShot(x, shotHeight))
-	{
-        //We hit something!
-    System.out.println("An alien shot the barrier!");
-    barrier3.loseHP();
-    shotState = false;
-    return true;
+		shotState = false;
+		barrier1.changeHit();
 	}
 
-        shotHeight = shotHeight + 2;
 	//We could have written this as
 	//shotHeight -= 2;
 	

@@ -86,15 +86,16 @@ public class Ship implements MouseListener, MouseMotionListener {
    *
    */ 
   public void mousePressed(MouseEvent me) {
-
+	  AlienArmy army = spaceInvaders.getAlienArmy();
+      shot = new Shot(x+(int)(SHIP_WIDTH/2), heightPosition, army);
   }
 
   /**
    * Fire a shot at the aliens - mouse click
    */ 
   public void mouseClicked(MouseEvent me) {
-      AlienArmy army = spaceInvaders.getAlienArmy();
-      shot = new Shot(x+(int)(SHIP_WIDTH/2), heightPosition, army);
+      //AlienArmy army = spaceInvaders.getAlienArmy();
+      //shot = new Shot(x+(int)(SHIP_WIDTH/2), heightPosition, army);
   }
 
   /**

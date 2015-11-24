@@ -9,31 +9,25 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Barrier 
-{
-	private int xloc;
-	private int yloc;
-	private int health = 100;
+{	Points point;
 	Image barrierImage = null;
-	private boolean stillAlive = true;
-	private Point[] points = new Point[4];
-	public Barrier(int a, int b, Image bar)
+	private boolean hitState;
+	public Barrier(int a, int b)
 	{
-		points[0] = new Point(a,b);
+		hitState = false;
+		point = new Points(a,b);
 	}
-	public void loseHP()
+	public boolean getHitState()
 	{
-		health-=25;
-		if(health==0)
-		{
-			stillAlive = false;
-		}
+		return hitState;
 	}
 	public void drawBarriers(Graphics g)
 	{
-		if(stillAlive)
-			{
-			g.drawImage(barrierImage,xloc,yloc,75,40,null);
-			}
+		if(hitState = false)
+		{
+				g.setColor(Color.green);
+				g.fillRect(point.getX(), point.getY(), 40, 20);
+		}
 	}
 	 public boolean checkShot(int xShot, int yShot) {
 
@@ -42,16 +36,20 @@ public class Barrier
 	      //If it's alreay been shot then return false;
 	      // return false;
 	      //}
-
-	      //First lets check the X range
-	      if ((xShot >= xloc) && (xShot <= (xloc+75))) {
-	          //X is ok, now lets check the Y range
-	          if ((yShot >= yloc) && (yShot <= (yloc+40))) {
-	              //The ship was hit!
-	              return true;
-	          }
-	      } 
+//First lets check the X range
+		 if (point.getIsIn(xShot,yShot)&&hitState==false)
+				 {
+			 
+	                point.setHit(true);
+	                changeHit();
+	                return true;
+				 }
 	      return false;
-	  }
-
+	 }
+	 public void changeHit()
+	 {
+		 point.setHit(true);
+	 }
 }
+
+
