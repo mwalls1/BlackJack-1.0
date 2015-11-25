@@ -47,8 +47,7 @@ public class Alien {
 	//Is the alien currently alive?
         if(hitState){
         	return false;
-        }
-        //First lets check the X range
+        }//First lets check the X range
         if ((x >= leftPosition) && (x <= (leftPosition+ALIEN_WIDTH))) {
             //X is ok, now lets check the Y range
             if ((y >= heightPosition) && (y <= (heightPosition+ALIEN_HEIGHT))) {

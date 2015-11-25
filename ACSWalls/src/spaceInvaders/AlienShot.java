@@ -42,7 +42,7 @@ public class AlienShot implements Runnable {
     private boolean moveShot() {
 	
 	//Now we need to see if the ship has been hit
-	if (ship.checkShot(x, shotHeight)) {
+	if (ship.checkShot(x, shotHeight)&&shotState == true) {
             //We hit something!
             System.out.println("An alien shot the ship!");
 	    ship.hitByAlien();
@@ -54,7 +54,22 @@ public class AlienShot implements Runnable {
 	{
 		shotState = false;
 		barrier1.changeHit();
+		barrier1.changeHitState();
 	}
+	if(barrier2.checkShot(x, shotHeight)&&!barrier2.getHitState())
+	{
+		shotState = false;
+		barrier2.changeHit();
+		barrier2.changeHitState();
+	}
+
+	if(barrier3.checkShot(x, shotHeight)&&!barrier3.getHitState())
+	{
+		shotState = false;
+		barrier3.changeHit();
+		barrier3.changeHitState();
+	}
+
 
 	//We could have written this as
 	//shotHeight -= 2;

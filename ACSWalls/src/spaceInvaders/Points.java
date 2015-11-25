@@ -3,7 +3,7 @@ package spaceInvaders;
 import java.awt.Polygon;
 
 public class Points {
-	private boolean hitState = false;
+	private boolean hitState;
 	Polygon p;
 	private int x;
 	private int y;
@@ -17,9 +17,9 @@ public class Points {
 		p.addPoint(a+40, b);
 		p.addPoint(a, b+20);
 	}
-	public boolean getIsIn(int x, int y)
+	public boolean getIsIn(int z, int s)
 	{
-		return p.contains(x, y);
+		return p.contains(z, s);
 	}
 	public int getX()
 	{

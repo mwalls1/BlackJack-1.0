@@ -12,7 +12,9 @@ public class Shot implements Runnable {
 
     private int SHOT_WIDTH = 2;
     private int SHOT_HEIGHT = 5; 
-
+    Barrier barrier1 = new Barrier(75,280);
+    Barrier barrier2 = new Barrier(255,280);
+    Barrier barrier3 = new Barrier(425,280);
     private int x = 0;
 
     private int shotHeight = 0;
@@ -21,6 +23,7 @@ public class Shot implements Runnable {
 
     AlienArmy alienArmy = null;
     private Image shotImage = null;
+    Barrier barrier = null;
 
     /**
      *
@@ -39,12 +42,26 @@ public class Shot implements Runnable {
     private boolean moveShot() {
 
         //Now we need to see if we've hit anything!
-        if (alienArmy.checkShot(x, shotHeight)) {
+        if (shotState == true&&alienArmy.checkShot(x, shotHeight)) {
             //We hit something!
             System.out.println("We shot an alien!");
             shotState = false;
             return true;
         }
+        if(barrier1.checkShot(x, shotHeight))
+        {
+        	shotState = false;
+        }
+        if(barrier2.checkShot(x, shotHeight))
+        {
+        	shotState = false;
+        }
+
+        if(barrier3.checkShot(x, shotHeight))
+        {
+        	shotState = false;
+        }
+
 
         shotHeight = shotHeight - 2;
         //We could have written this as

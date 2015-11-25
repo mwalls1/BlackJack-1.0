@@ -23,11 +23,9 @@ public class Barrier
 	}
 	public void drawBarriers(Graphics g)
 	{
-		if(hitState = false)
-		{
-				g.setColor(Color.green);
+		g.setColor(Color.green);
+	if(!hitState)
 				g.fillRect(point.getX(), point.getY(), 40, 20);
-		}
 	}
 	 public boolean checkShot(int xShot, int yShot) {
 
@@ -37,10 +35,8 @@ public class Barrier
 	      // return false;
 	      //}
 //First lets check the X range
-		 if (point.getIsIn(xShot,yShot)&&hitState==false)
+		 if (point.getIsIn(xShot,yShot)&&point.getHit()==false)
 				 {
-			 
-	                point.setHit(true);
 	                changeHit();
 	                return true;
 				 }
@@ -49,6 +45,10 @@ public class Barrier
 	 public void changeHit()
 	 {
 		 point.setHit(true);
+	 }
+	 public void changeHitState()
+	 {
+		 hitState = !hitState;
 	 }
 }
 

@@ -85,6 +85,9 @@ public class SpaceInvaders extends JFrame implements Runnable {
         offscreen_high = offscreen.createGraphics();
         setBackground(Color.black);
         setSize(WIDTH, HEIGHT);
+        getContentPane().add(scoree);
+        scoree.setForeground(Color.white);
+        scoree.setVisible(true);
         setVisible(true);
         startGame();
     }
@@ -225,10 +228,6 @@ public class SpaceInvaders extends JFrame implements Runnable {
      */
     public AlienArmy getAlienArmy() {
         return army;
-    }
-    public Image getBase()
-    {
-    	return bar;
     }
 
     /**
