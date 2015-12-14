@@ -13,6 +13,6 @@ public class Lab16d
 	{
 		//make a new MadLib
 		MadLib myLib = new MadLib("data/story.dat");
-		out.println("\n");
+		out.println(myLib+"\n");
 	}
 }
