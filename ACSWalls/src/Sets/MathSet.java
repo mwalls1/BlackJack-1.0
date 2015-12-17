@@ -28,15 +28,15 @@ public class MathSet
 
 	public MathSet(String o, String t)
 	{
-		Scanner scan  = new Scanner(o);
-		while (scan.hasNextInt()) {
-			one.add(scan.nextInt());
+		this();
+		String [] x=o.split(" ");
+		String [] y=t.split(" ");
+		for (String s: x){
+			one.add(Integer.parseInt(s));
 		}
-		Scanner sca  = new Scanner(t);
-		while (sca.hasNextInt()) {
-			two.add(sca.nextInt());
+		for (String u: y){
+			two.add(Integer.parseInt(u));
 		}
-
 	}
 
 	public Set<Integer> union()
@@ -83,6 +83,6 @@ public class MathSet
 	
 	public String toString()
 	{
-		return "Set one " + one + "\n" +	"Set two " + two +  "\n"+"union - "+union()+"\n"+"intersection - "+intersection()+"\n"+"Difference A-B - "+differenceAMinusB()+"\n"+"Difference B-A - "+differenceBMinusA()+"\n"+"Symmetric Difference - "+symmetricDifference();
+		return "Set one " + one + "\n" +	"Set two " + two +  "\n"+"union - "+union()+"\n"+"intersection - "+intersection()+"\n"+"Difference A-B - "+differenceAMinusB()+"\n"+"Difference B-A - "+differenceBMinusA()+"\n"+"Symmetric Difference - "+symmetricDifference()+"\n\n";
 	}
 }

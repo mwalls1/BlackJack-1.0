@@ -29,9 +29,14 @@ public class Lab07c
 				}
 				else
 					two+=scan.nextLine();
+				if(!a)
+				{
+					mySet = new MathSet(one,two);
+					System.out.println(mySet);
+					one = "";
+					two = "";
+				}
 				a=!a;
-				mySet = new MathSet(one,two);
-				System.out.println(mySet);
 				
 			}
 				
