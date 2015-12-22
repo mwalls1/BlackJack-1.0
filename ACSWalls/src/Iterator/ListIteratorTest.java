@@ -41,7 +41,6 @@ public class ListIteratorTest
 		{
 			if(it.next().equals(toRemove))
 			{
-				it.remove();
 				it.set(replaceWith);
 			}
 		}
