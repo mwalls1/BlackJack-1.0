@@ -20,10 +20,12 @@ public class Lab06a
 		//add test cases
 		ArrayList<Word> myList=new ArrayList<Word>();
 		Scanner scan=new Scanner(new File("data/lab06a.dat"));
-		while(scan.hasNE)
-		
-		
-		Word myWord = new Word();
-		System.out.println(myWord);
+		while(scan.hasNext())
+			myList.add(new Word(scan.next()));
+		Collections.sort(myList);
+		for(Word words: myList)
+		{
+			System.out.println(words);
+		}
 	}
 }

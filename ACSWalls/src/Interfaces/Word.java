@@ -1,6 +1,5 @@
 package Interfaces;
 
-
 import static java.lang.System.*;
 
 import java.util.ArrayList;
@@ -20,9 +19,8 @@ public class Word implements Comparable<Word> {
 			return 1;
 		} else if (this.word.length() < other.word.length()) {
 			return -1;
-		}
-
-		return 0;
+		} else
+			return this.word.compareTo(other.word);
 	}
 
 	public void setString(String a) {
