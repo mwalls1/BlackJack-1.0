@@ -21,19 +21,17 @@ public class SpanishToEnglish {
 	}
 
 	public void putEntry(String entry) {
-		String[] list = entry.split(" ");
-		pairs.put(list[0], list[1]);
-		/*
-		 * for(int i = 0; i < list.length-1; i ++) {
-		 * pairs.put(list[i],list[i+1]); }
-		 */
+		String[] list = entry.split(" "); 
+		String key = list[0];
+		String value = list[1];
+		pairs.put(key, value);
 	}
 
 	public String translate(String sent) {
 		Scanner chop = new Scanner(sent);
 		String output = "";
 		while (chop.hasNext()) {
-			output += pairs.get(chop.nextLine()) + " ";
+			output += pairs.get(chop.next()) + " ";
 		}
 		return output;
 	}
