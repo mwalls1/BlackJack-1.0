@@ -6,38 +6,26 @@ package Interfaces;
 //Class -
 //Lab  -
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
 import static java.lang.System.*;
 
-public class VowelWord implements Comparable<VowelWord> {
-	// add a string instance variable
-	private String myWord;
-
-	// add a constructor
-	public VowelWord(String a) {
-		myWord = a;
-	}
-
-	public int numVowels() {
-		String vowels = "AEIOUaeiou";
-		int vowelCount = 0;
-		for (int i = 0; i < myWord.length() - 1; i++) {
-			if (vowels.contains(myWord.substring(i, i + 1))) {
-				vowelCount++;
-			}
+public class Lab06a
+{
+	public static void main( String args[] ) throws IOException
+	{
+		//add test cases
+		ArrayList<Word> myList=new ArrayList<Word>();
+		Scanner scan=new Scanner(new File("data/lab06a.dat"));
+		while(scan.hasNext())
+			myList.add(new Word(scan.next()));
+		Collections.sort(myList);
+		for(Word words: myList)
+		{
+			System.out.println(words);
 		}
-		return vowelCount;
-	}
-
-	public int compareTo(VowelWord other) {
-		if (numVowels() > other.numVowels()) {
-			return 1;
-		} else if (numVowels() < other.numVowels()) {
-			return -1;
-		} else
-			return this.myWord.compareTo(other.myWord);
-	}
-
-	public String toString() {
-		return myWord;
 	}
 }

@@ -24,10 +24,7 @@ public class Lab06c
 		while(scan.hasNext())
 			myList.add(new Person(scan.nextInt(),scan.nextInt(),scan.nextInt(),scan.nextLine()));
 		Collections.sort(myList);
-		for(Person words: myList)
-		{
-			System.out.println(words);
-		}
+		 
 
 	}
 }

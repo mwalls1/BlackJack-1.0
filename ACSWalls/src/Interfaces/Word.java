@@ -1,34 +1,31 @@
 package Interfaces;
 
+//� A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
 import static java.lang.System.*;
 
-import java.util.ArrayList;
-
-public class Word implements Comparable<Word> {
-	// add an instance variable and a constructor
-	// private ArrayList<String> words = new ArrayList<String>();
-	private String word = "";
-
-	public Word(String w) {
-		word = w;
-	}
-
-	// add a compareTo
-	public int compareTo(Word other) {
-		if (this.word.length() > other.word.length()) {
-			return 1;
-		} else if (this.word.length() < other.word.length()) {
-			return -1;
-		} else
-			return this.word.compareTo(other.word);
-	}
-
-	public void setString(String a) {
-		word = a;
-	}
-
-	// add a toString
-	public String toString() {
-		return word;
+public class Lab06a
+{
+	public static void main( String args[] ) throws IOException
+	{
+		//add test cases
+		ArrayList<Word> myList=new ArrayList<Word>();
+		Scanner scan=new Scanner(new File("data/lab06a.dat"));
+		while(scan.hasNext())
+			myList.add(new Word(scan.next()));
+		Collections.sort(myList);
+		for(Word words: myList)
+		{
+			System.out.println(words);
+		}
 	}
 }

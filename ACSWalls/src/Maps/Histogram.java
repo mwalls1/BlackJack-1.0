@@ -17,10 +17,15 @@ public class Histogram
 
 	public Histogram()
 	{
+		histogram = new TreeMap<String, Integer>();
 	}
 
 	public Histogram(String sent)
 	{
+		String[] list = sent.split(" "); 
+		String key = list[0];
+		String value = list[1];
+		histogram.put(key, Integer.parseInt(value));
 	}
 	
 	public void setSentence()
