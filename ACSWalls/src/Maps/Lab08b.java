@@ -16,6 +16,9 @@ public class Lab08b
 	public static void main( String args[] ) throws IOException
 	{
 		//add test cases
+		Histogram myHist = new Histogram();
+		myHist.setSentence("a b c d e f g h i a c d e g h i h k");
+		System.out.println(myHist);
 		
 		
 		

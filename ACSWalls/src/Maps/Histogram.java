@@ -17,7 +17,7 @@ public class Histogram
 
 	public Histogram()
 	{
-		histogram = new TreeMap<String, Integer>();
+		
 	}
 
 	public Histogram(String sent)
@@ -28,14 +28,32 @@ public class Histogram
 		histogram.put(key, Integer.parseInt(value));
 	}
 	
-	public void setSentence()
+	public void setSentence(String sent)
 	{
+		histogram = new TreeMap<String, Integer>();
+		String[] list = sent.split(" "); 
+		for(int i = 0; i < list.length; i ++)
+		{
+			if(histogram.get(list[i])==null)
+			{
+				histogram.put(list[i], 0);
+			}
+			histogram.put(list[i],histogram.get(list[i]+1));
+		}
 	}
 
 	public String toString()
 	{
-		String output="";
-		String allStars="";
+		String allStars = "";
+		String output = "";
+		
+		for(String s: histogram.keySet()){
+			for(int i=0; i<histogram.get(s);i++){
+				output+="*";
+			}
+			System.out.println("\n");
+			
+		}
 		return output+"\n\n";
 	}
 }
