@@ -1,9 +1,9 @@
 package magPIE;
 
-import weather.getForecast;
+
 import java.util.*;
 
-import com.temboo.core.TembooException;
+
 
 /**
  * A program to carry on conversations with a human user.
@@ -38,7 +38,7 @@ public class Magpie5
 	 * @return a response based on the rules given
 	 * @throws TembooException 
 	 */
-	public String getResponse(String statement) throws TembooException
+	public String getResponse(String statement)
 	{
 		String response = "";
 		if (statement.length() == 0)
@@ -71,11 +71,7 @@ public class Magpie5
 		{
 			response = transformIYouStatement(statement);
 		}
-		else if (findKeyword(statement, "weather", 0)>=0)
-		{
-			System.out.print("Hmm, weather. Whats your address? ");
-			response = getWeather(scan.nextLine());
-		}
+
 
 		else
 		{
@@ -266,13 +262,7 @@ public class Magpie5
 		String restOfStatement = statement.substring(psn +2).trim();
 		return "Why do you " + restOfStatement + " me?";
 	}
-	private String getWeather(String add) throws TembooException
-	{
-		getForecast weather = new getForecast(add);
-		weather.getFor();
-		String output = weather.toString();
-		return output;
-	}
+	
 	
 
 
