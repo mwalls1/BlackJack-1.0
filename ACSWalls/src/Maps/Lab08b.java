@@ -15,10 +15,12 @@ public class Lab08b
 {
 	public static void main( String args[] ) throws IOException
 	{
-		//add test cases
-		Histogram myHist = new Histogram();
-		myHist.setSentence("a b c d e f g h i a c d e g h i h k");
-		System.out.println(myHist);
+		Scanner scan = new Scanner(new File("data/lab08b.dat"));
+		Histogram test = new Histogram();
+		while(scan.hasNextLine())
+			for(int i = 0; i < 1; i ++)
+				test = new Histogram(scan.nextLine());
+			out.println(test);
 		
 		
 		
