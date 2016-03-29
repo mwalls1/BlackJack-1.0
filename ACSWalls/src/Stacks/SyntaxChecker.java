@@ -27,7 +27,6 @@ public class SyntaxChecker {
 	}
 
 	public boolean checkExpression() {
-		boolean b = true;
 		char[] chars = exp.toCharArray();
 		for (int i = 0; i < chars.length; i++) {
 			if (chars[i] == '<' || chars[i] == '(' || chars[i] == '[' || chars[i] == '{') {
