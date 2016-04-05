@@ -22,6 +22,6 @@ public class Lab14c
 		System.out.println(myPQ.removeMin());
 		System.out.println(myPQ.getMin());
 		System.out.println(myPQ.removeMin());
-		
+		System.out.println(myPQ.removeMin());		
 	}
 }

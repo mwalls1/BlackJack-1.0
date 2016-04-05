@@ -30,7 +30,7 @@ public class MonsterPQ
 	
 	public Object getMin()
 	{
-				return pQueue.poll();
+		return pQueue.peek();
 	}
 	
 	public Object removeMin()
