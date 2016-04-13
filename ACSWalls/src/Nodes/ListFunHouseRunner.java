@@ -44,14 +44,14 @@ public class ListFunHouseRunner
 		ListFunHouse.print(z);
 		out.println();				
 				
-		//ListFunHouse.removeXthNode(z,2);		
-		//out.println("\nList values after calling removeXthNode(2)\n");					
-		//ListFunHouse.print(z);
-		//out.println();			
+		ListFunHouse.removeXthNode(z,2);		
+		out.println("\nList values after calling removeXthNode(2)\n");					
+		ListFunHouse.print(z);
+		out.println();			
 				
-		//ListFunHouse.setXthNode(z,2,"one");		
-		//out.println("\nList values after calling setXthNode(2,one)\n");										
-		//ListFunHouse.print(z);
-		//out.println();				
+		ListFunHouse.setXthNode(z,2,"one");		
+		out.println("\nList values after calling setXthNode(2,one)\n");										
+		ListFunHouse.print(z);
+		out.println();				
 	}
 }
