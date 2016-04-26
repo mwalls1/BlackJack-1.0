@@ -19,13 +19,15 @@ public class HashTable
 		table = new LinkedList[10];
 		for(int i =0; i < table.length; i ++)
 		{
-			table[i]=new LinkedList<Number>();
+			table[i]=new LinkedList<Word>();
 		}
 	}
 
 	public void add(Object obj)
 	{
 		int i = obj.hashCode();
+		System.out.print(obj+" ");
+		System.out.print(i+"\n");
 		if(!(table[i].contains(obj))){
 			table[i].add(obj);
 		}
