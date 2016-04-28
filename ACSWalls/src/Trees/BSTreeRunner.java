@@ -25,6 +25,12 @@ public class BSTreeRunner
  		tree.preOrder();
  		tree.postOrder();
  		tree.reverse();
+ 		tree.numNodes();
+ 		tree.numLeaves();
+ 		tree.height();
+ 		tree.getWidth();
+ 		tree.numLeaves();
+ 		tree.isFull();
  		
  		
  		
