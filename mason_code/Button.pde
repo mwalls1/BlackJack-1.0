@@ -13,7 +13,7 @@ class Button{
     }
     rect(x, y, 100, 30);
     fill(0);
-    text(label, x+45, y + 20);
+    text(label, x+30, y + 20);
   }
   boolean over(){
     if(mouseX >= x && mouseY >= y && mouseX <= x + 100 && mouseY <= y + 30){
