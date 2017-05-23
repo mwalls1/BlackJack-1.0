@@ -1,5 +1,8 @@
 class Button{
   int x,y;
+  int r = floor(random(255));
+  int g= floor(random(255));
+  int b= floor(random(255));
   String label;
   Button(int x, int y, String label){
     this.x = x;
@@ -7,9 +10,9 @@ class Button{
     this.label = label;
   }
   void draw(){
-    fill(200);
+    fill(r,g,b);
     if(over()){
-  fill(255);
+  fill(255-r,255-g,255-b);
     }
     rect(x, y, 100, 30);
     fill(0);

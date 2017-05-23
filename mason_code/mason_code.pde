@@ -2,6 +2,7 @@ int dealer;
 int player;
 int faceDown;
 boolean cosmic = false;
+String filePath = dataPath("ace.png");
 Button hit;
 Button stay;
 Button replay;
@@ -22,13 +23,12 @@ ArrayList<card> cards = new ArrayList<card>();
 ArrayList<card> dealersHand = new ArrayList<card>();
 ArrayList<card> playersHand = new ArrayList<card>();
 card faceDownCard;
-int r= floor(random(255));
+int r = floor(random(255));
 int g= floor(random(255));
-int b = floor(random(255));
+int b= floor(random(255));
 void setup()
 {
-  
-  size(1500, 1000);
+  size(1700, 1000);
   hit = new Button(50,50, "Hit");
   stay = new Button(300,50, "Stay");
   replay = new Button(700,50,"Replay");
@@ -71,6 +71,8 @@ void mousePressed()
   int draw;
   if(madeBet == false&&bet5.over()&&money>=5)
   {
+   // playSound = minim.loadFile("chipLay3.wav");
+    //playSound.play();
     newGame();
     bet+=5;
     money-=5;
@@ -122,7 +124,9 @@ void mousePressed()
         play();
    }
    if(replay.over()&&gameOver==true)
-   clear();
+   {
+     clear();
+   }
 }
 void play()
 {
@@ -198,6 +202,7 @@ void paintDealer()
 }
 void newGame()
 {
+
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
@@ -291,8 +296,4 @@ void clear()
      noWIn = false; 
      gameOver = false; 
      gameOn = false;
-}
-void keyPressed()
-{
-  
 }

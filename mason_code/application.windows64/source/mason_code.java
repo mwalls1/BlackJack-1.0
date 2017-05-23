@@ -17,6 +17,8 @@ public class mason_code extends PApplet {
 int dealer;
 int player;
 int faceDown;
+boolean cosmic = false;
+String filePath = dataPath("ace.png");
 Button hit;
 Button stay;
 Button replay;
@@ -27,7 +29,7 @@ int money = 100;
 int bet;
 boolean madeBet = false;
 boolean bust = false;
-boolean isTurn = true;
+boolean isTurn = false;
 boolean playerWin = false;
 boolean dealerWin = false;
 boolean noWIn = false;
@@ -37,12 +39,11 @@ ArrayList<card> cards = new ArrayList<card>();
 ArrayList<card> dealersHand = new ArrayList<card>();
 ArrayList<card> playersHand = new ArrayList<card>();
 card faceDownCard;
-int r;
-int g;
-int b;
+int r = floor(random(255));
+int g= floor(random(255));
+int b= floor(random(255));
 public void setup()
 {
-  
   
   hit = new Button(50,50, "Hit");
   stay = new Button(300,50, "Stay");
@@ -53,9 +54,6 @@ public void setup()
 }
 public void draw()
 {
-  r = floor(random(255));
-  g = floor(random(255));
-  b = floor(random(255));
   textSize(15);
   background(r,g,b);
   paintPlayer();
@@ -89,10 +87,13 @@ public void mousePressed()
   int draw;
   if(madeBet == false&&bet5.over()&&money>=5)
   {
+   // playSound = minim.loadFile("chipLay3.wav");
+    //playSound.play();
     newGame();
     bet+=5;
     money-=5;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   else if(madeBet == false&&bet10.over()&&money>=10)
@@ -101,6 +102,7 @@ public void mousePressed()
     bet+=10;
     money-=10;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   else if(madeBet == false&&bet15.over()&&money>=15)
@@ -109,6 +111,7 @@ public void mousePressed()
     bet+=15;
     money-=15;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   if(hit.over()&&isTurn == true&&bust==false&&madeBet == true)
@@ -137,7 +140,9 @@ public void mousePressed()
         play();
    }
    if(replay.over()&&gameOver==true)
-   clear();
+   {
+     clear();
+   }
 }
 public void play()
 {
@@ -213,6 +218,7 @@ public void paintDealer()
 }
 public void newGame()
 {
+
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
@@ -300,7 +306,7 @@ public void clear()
      playersHand.remove(0);
      madeBet = false;
      bust = false;
-     isTurn = true;
+     isTurn = false;
      playerWin = false; 
      dealerWin = false;
      noWIn = false; 
@@ -309,6 +315,9 @@ public void clear()
 }
 class Button{
   int x,y;
+  int r = floor(random(255));
+  int g= floor(random(255));
+  int b= floor(random(255));
   String label;
   Button(int x, int y, String label){
     this.x = x;
@@ -316,9 +325,9 @@ class Button{
     this.label = label;
   }
   public void draw(){
-    fill(200);
+    fill(r,g,b);
     if(over()){
-  fill(255);
+  fill(255-r,255-g,255-b);
     }
     rect(x, y, 100, 30);
     fill(0);
@@ -342,7 +351,7 @@ public class card
     image.resize(100,200);
   }
 }
-  public void settings() {  size(1500, 1000); }
+  public void settings() {  size(1700, 1000); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "mason_code" };
     if (passedArgs != null) {
