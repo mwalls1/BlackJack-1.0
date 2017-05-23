@@ -1,8 +1,11 @@
 public class card
 {
   public int value;
-  public card(int a)
+  public PImage image;
+  public card(int a, PImage b)
   {
     value = a;
+    image = b;
+    image.resize(100,200);
   }
 }
