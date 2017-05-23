@@ -4,6 +4,12 @@ int faceDown;
 Button hit;
 Button stay;
 Button replay;
+Button bet5;
+Button bet10;
+Button bet15;
+int money = 100;
+int bet;
+boolean madeBet = false;
 boolean bust = false;
 boolean isTurn = true;
 boolean playerWin = false;
@@ -15,44 +21,93 @@ ArrayList<card> cards = new ArrayList<card>();
 ArrayList<card> dealersHand = new ArrayList<card>();
 ArrayList<card> playersHand = new ArrayList<card>();
 card faceDownCard;
+int r;
+int g;
+int b;
 void setup()
 {
   
-  size(1920, 1080);
+  size(1500, 1000);
   hit = new Button(50,50, "Hit");
   stay = new Button(300,50, "Stay");
   replay = new Button(700,50,"Replay");
-  newGame();
+  bet5 = new Button(50,200,"Bet $5");
+  bet10 = new Button(150,200,"Bet $10");
+  bet15 = new Button(250,200,"Bet $15");
 }
 void draw()
 {
-  background(150);
+  r = floor(random(255));
+  g = floor(random(255));
+  b = floor(random(255));
+  textSize(15);
+  background(r,g,b);
   paintPlayer();
   paintDealer();
   hit.draw();
   stay.draw();
   replay.draw();
+  bet5.draw();
+  bet10.draw();
+  bet15.draw();
   text("Player: "+player, 10,150);
   text("Dealer: "+dealer, 100,150);
+  text("Cash: $"+money,200,150);
+  text("Bet: $"+bet,350,150);
+  if(madeBet == false)
+  {
+  textSize(50);
+  text("Please make a bet",300,500);
+  textSize(10);
+  }
   if(playerWin==true)
-  text("Player Wins!",200,150);
+  text("Player Wins!",500,150);
   else if(dealerWin==true)
-  text("Dealer Wins!",200,150);
+  text("Dealer Wins!",500,150);
   else if(noWIn==true)
-  text("Its a draw!",200,150);
+  text("Its a draw!",500,150);
 
 }
 void mousePressed()
 {
   int draw;
-  if(hit.over()&&isTurn == true&&bust==false)
+  if(madeBet == false&&bet5.over()&&money>=5)
+  {
+    newGame();
+    bet+=5;
+    money-=5;
+    madeBet = true;
+    redraw();
+  }
+  else if(madeBet == false&&bet10.over()&&money>=10)
+  {
+    newGame();
+    bet+=10;
+    money-=10;
+    madeBet = true;
+    redraw();
+  }
+  else if(madeBet == false&&bet15.over()&&money>=15)
+  {
+    newGame();
+    bet+=15;
+    money-=15;
+    madeBet = true;
+    redraw();
+  }
+  if(hit.over()&&isTurn == true&&bust==false&&madeBet == true)
   {
     draw = floor(random(cards.size()));
     player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
     print("\nPlayers hand: "+player);
-    if(player>21)
+    if(player == 21)
+    {
+      isTurn = false;
+      play();
+    }
+    else if(player>21)
     {
       bust = true;
       isTurn = false;
@@ -66,16 +121,24 @@ void mousePressed()
         play();
    }
    if(replay.over()&&gameOver==true)
-   newGame();
+   clear();
 }
 void play()
 {
   if(player>21)
-  dealerWin = true;
+  {
+    dealerWin = true;
+    gameOver = true;
+  }
   if(player==21)
-  playerWin = true;
+  {
+    playerWin = true;
+    money+=bet*3;
+    bet = 0;
+    gameOver = true;
+  }
   int draw;
-  if(isTurn == false&&bust == false)
+  if(isTurn == false&&bust == false&& gameOver == false)
   {
     dealer+=faceDown;
     dealersHand.add(faceDownCard);
@@ -88,6 +151,7 @@ void play()
       print("\nDealer draws: "+cards.get(draw).value);
       cards.remove(draw);
       print("\nDealers hand: "+dealer);
+      redraw();
     }
     if(dealer>player&&dealer<=21)
     {
@@ -99,12 +163,14 @@ void play()
     {
     print("\nDraw!");
     gameOver = true;
+    money+=bet;
     noWIn = true;
     }
     else
     {
     print("\nPlayer Wins!");
     gameOver = true;
+    money+=bet*2;
     playerWin = true;
     }
   }
@@ -119,32 +185,18 @@ void paintPlayer()
 {
   for(int i =0; i<playersHand.size(); i++)
   {
-    image(playersHand.get(i).image, 100+i*100,400);
+    image(playersHand.get(i).image, 100+i*110,400);
   }
 }
 void paintDealer()
 {
   for(int i =0; i<dealersHand.size(); i++)
   {
-    image(dealersHand.get(i).image, 900+i*100,400);
+    image(dealersHand.get(i).image, 900+i*110,400);
   }
 }
 void newGame()
 {
-  gameOver = false;
-  isTurn = true;
-  bust = false;
-  playerWin = false;
-  dealerWin = false;
-  noWIn = false;
-  while(cards.size()>0)
-    cards.remove(0);
-  while(dealersHand.size()>0)
-    dealersHand.remove(0);
-   while(playersHand.size()>0)
-     playersHand.remove(0);
-  player = 0;
-  dealer = 0;
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
@@ -218,4 +270,24 @@ void newGame()
       bust = true;
       print("\nPlayers hand: "+player);
       gameOn = true;
+}
+void clear()
+{
+  bet = 0;
+  player = 0;
+  dealer = 0;
+  while(cards.size()>0)
+    cards.remove(0);
+  while(dealersHand.size()>0)
+    dealersHand.remove(0);
+   while(playersHand.size()>0)
+     playersHand.remove(0);
+     madeBet = false;
+     bust = false;
+     isTurn = true;
+     playerWin = false; 
+     dealerWin = false;
+     noWIn = false; 
+     gameOver = false; 
+     gameOn = false;
 }

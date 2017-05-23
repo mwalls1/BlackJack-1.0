@@ -1,6 +1,7 @@
 int dealer;
 int player;
 int faceDown;
+boolean cosmic = false;
 Button hit;
 Button stay;
 Button replay;
@@ -11,7 +12,7 @@ int money = 100;
 int bet;
 boolean madeBet = false;
 boolean bust = false;
-boolean isTurn = true;
+boolean isTurn = false;
 boolean playerWin = false;
 boolean dealerWin = false;
 boolean noWIn = false;
@@ -21,6 +22,9 @@ ArrayList<card> cards = new ArrayList<card>();
 ArrayList<card> dealersHand = new ArrayList<card>();
 ArrayList<card> playersHand = new ArrayList<card>();
 card faceDownCard;
+int r;
+int g;
+int b;
 void setup()
 {
   
@@ -34,7 +38,21 @@ void setup()
 }
 void draw()
 {
-  background(150);
+  if(keyPressed)
+  {
+    if(key == 32)
+    {
+      cosmic = !cosmic;
+    }
+  }
+  r = floor(random(255));
+  g = floor(random(255));
+  b = floor(random(255));
+  textSize(15);
+  if(cosmic)
+    background(r,g,b);
+  else
+    background(100,100,100);
   paintPlayer();
   paintDealer();
   hit.draw();
@@ -47,6 +65,12 @@ void draw()
   text("Dealer: "+dealer, 100,150);
   text("Cash: $"+money,200,150);
   text("Bet: $"+bet,350,150);
+  if(madeBet == false)
+  {
+  textSize(50);
+  text("Please make a bet",300,500);
+  textSize(10);
+  }
   if(playerWin==true)
   text("Player Wins!",500,150);
   else if(dealerWin==true)
@@ -64,6 +88,7 @@ void mousePressed()
     bet+=5;
     money-=5;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   else if(madeBet == false&&bet10.over()&&money>=10)
@@ -72,6 +97,7 @@ void mousePressed()
     bet+=10;
     money-=10;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   else if(madeBet == false&&bet15.over()&&money>=15)
@@ -80,6 +106,7 @@ void mousePressed()
     bet+=15;
     money-=15;
     madeBet = true;
+    isTurn = true;
     redraw();
   }
   if(hit.over()&&isTurn == true&&bust==false&&madeBet == true)
@@ -184,21 +211,6 @@ void paintDealer()
 }
 void newGame()
 {
-  gameOver = false;
-  isTurn = true;
-  bust = false;
-  playerWin = false;
-  dealerWin = false;
-  noWIn = false;
-  madeBet = false;
-  while(cards.size()>0)
-    cards.remove(0);
-  while(dealersHand.size()>0)
-    dealersHand.remove(0);
-   while(playersHand.size()>0)
-     playersHand.remove(0);
-  player = 0;
-  dealer = 0;
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
   cards.add(new card(1,loadImage("ace.png")));
@@ -276,6 +288,8 @@ void newGame()
 void clear()
 {
   bet = 0;
+  player = 0;
+  dealer = 0;
   while(cards.size()>0)
     cards.remove(0);
   while(dealersHand.size()>0)
@@ -284,10 +298,14 @@ void clear()
      playersHand.remove(0);
      madeBet = false;
      bust = false;
-     isTurn = true;
+     isTurn = false;
      playerWin = false; 
      dealerWin = false;
      noWIn = false; 
      gameOver = false; 
      gameOn = false;
+}
+void keyPressed()
+{
+  
 }
