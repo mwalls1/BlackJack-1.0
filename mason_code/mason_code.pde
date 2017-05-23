@@ -22,9 +22,9 @@ ArrayList<card> cards = new ArrayList<card>();
 ArrayList<card> dealersHand = new ArrayList<card>();
 ArrayList<card> playersHand = new ArrayList<card>();
 card faceDownCard;
-int r;
-int g;
-int b;
+int r= floor(random(255));
+int g= floor(random(255));
+int b = floor(random(255));
 void setup()
 {
   
@@ -38,21 +38,8 @@ void setup()
 }
 void draw()
 {
-  if(keyPressed)
-  {
-    if(key == 32)
-    {
-      cosmic = !cosmic;
-    }
-  }
-  r = floor(random(255));
-  g = floor(random(255));
-  b = floor(random(255));
   textSize(15);
-  if(cosmic)
-    background(r,g,b);
-  else
-    background(100,100,100);
+  background(r,g,b);
   paintPlayer();
   paintDealer();
   hit.draw();
