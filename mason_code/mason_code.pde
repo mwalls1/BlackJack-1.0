@@ -52,7 +52,12 @@ void mousePressed()
     playersHand.add(cards.get(draw));
     cards.remove(draw);
     print("\nPlayers hand: "+player);
-    if(player>21)
+    if(player == 21)
+    {
+      isTurn = false;
+      play();
+    }
+    else if(player>21)
     {
       bust = true;
       isTurn = false;
@@ -71,11 +76,17 @@ void mousePressed()
 void play()
 {
   if(player>21)
-  dealerWin = true;
+  {
+    dealerWin = true;
+    gameOver = true;
+  }
   if(player==21)
-  playerWin = true;
+  {
+    playerWin = true;
+    gameOver = true;
+  }
   int draw;
-  if(isTurn == false&&bust == false)
+  if(isTurn == false&&bust == false&& gameOver == false)
   {
     dealer+=faceDown;
     dealersHand.add(faceDownCard);
