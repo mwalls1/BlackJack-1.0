@@ -15,7 +15,7 @@ String hh = "+";
 Button bet10;
 Button bet15;
 int money = 100;
-int bet;
+int bet=0;
 boolean madeBet = false;
 boolean bust = false;
 boolean isTurn = false;
@@ -66,13 +66,12 @@ void draw()
   if (playerWin==true)
   {
     text("Player Wins!", 500, 150);
-    text(hh+winnings,245,170);
-  }
-  else if (dealerWin==true)
+    text(hh+winnings, 245, 170);
+  } else if (dealerWin==true)
     text("Dealer Wins!", 500, 150);
   else if (noWIn==true)
   {
-    text(hh+winnings,245,170);
+    text(hh+winnings, 245, 170);
     text("Its a draw!", 500, 150);
   }
 }
@@ -107,17 +106,19 @@ void mousePressed()
   if (hit.over()&&isTurn == true&&bust==false&&madeBet == true)
   {
     draw = floor(random(cards.size()));
-    if(player == 10&&cards.get(draw).value==1)
+    if (player == 10&&cards.get(draw).value==1)
     {
       player = 21;
-    }
-    else if(aceIs11==true&&player+cards.get(draw).value>21)
+    } else if (aceIs11==true&&player+cards.get(draw).value>21)
     {
       player+=cards.get(draw).value-10;
       aceIs11 = false;
-    }
-    else 
-      player+=cards.get(draw).value;
+    } else if (player<10&&cards.get(draw).value==1)
+    {
+      player+=11;
+      aceIs11  =true;
+    } else 
+    player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
     print("\nPlayers hand: "+player);
@@ -125,8 +126,7 @@ void mousePressed()
     {
       isTurn = false;
       play();
-    } 
-    else if (player>21)
+    } else if (player>21)
     {
       bust = true;
       isTurn = false;
@@ -145,81 +145,78 @@ void mousePressed()
 }
 void play()
 {
-  if (player==21)
-  {
-    playerWin = true;
-    winnings = bet*3;
-    money+=winnings;
-    bet = 0;
-    gameOver = true;
-  }
-  if(dealer+faceDown==21)
-  { 
-    dealersHand.add(faceDownCard);
-    dealer = 21;
-    gameOver = true;
-    bet = 0;
-    dealerWin = true;
-  }
-  if (bust)
-  {
-    dealerWin = true;
-    bet = 0;
-    gameOver = true;
-  }
-  
   int draw;
-  if (isTurn == false&&bust == false&& gameOver == false)
+  while (!gameOver)
   {
-    if(faceDown==1)
-      faceDown=11;
-    dealer+=faceDown;
-    dealersHand.add(faceDownCard);
-    print("\nDealers hand: "+dealer);
-    while (dealer<17)
+    if (player==21)
     {
-      draw = floor(random(cards.size()));
-      if(dealerAceIs11 == true&&dealer+cards.get(draw).value>21)
-      {
-        dealer+=cards.get(draw).value-10;
-        dealerAceIs11 = false;
-      }
-      else
-        dealer+=cards.get(draw).value;
-      dealersHand.add(cards.get(draw));
-      print("\nDealer draws: "+cards.get(draw).value);
-      cards.remove(draw);
-      print("\nDealers hand: "+dealer);
-      redraw();
-    }
-    if(dealer==21)
-    {
-      dealerWin = true;
-      bet = 0;
       gameOver = true;
-    }
-    else if (dealer>player&&dealer<21)
-    {
-      print("\nDealer Wins!");
-      dealerWin = true;
-      gameOver = true;
-      bet = 0;
-    } else if (player==dealer&&player<21)
-    {
-      print("\nDraw!");
-      gameOver = true;
-      winnings = bet;
-      money+=winnings;
-      noWIn = true;
-      bet = 0;
-    } else
-    {
-      print("\nPlayer Wins!");
-      gameOver = true;
-      winnings = bet*2;
-      money+=winnings;
+      winnings = bet*3;
       playerWin = true;
+      money+=winnings;
+    } else if (bust)
+    {
+      dealerWin = true;
       bet = 0;
+      gameOver = true;
+    } else if (dealer+faceDown==21)
+    { 
+      dealersHand.add(faceDownCard);
+      dealer = 21;
+      gameOver = true;
+      bet = 0;
+      dealerWin = true;
+    }
+    else if (isTurn == false&&bust == false&& gameOver == false)
+    {
+      if (faceDown==1)
+        faceDown=11;
+      dealer+=faceDown;
+      dealersHand.add(faceDownCard);
+      print("\nDealers hand: "+dealer);
+      while (dealer<17)
+      {
+        draw = floor(random(cards.size()));
+        if (dealerAceIs11 == true&&dealer+cards.get(draw).value>21)
+        {
+          dealer+=cards.get(draw).value-10;
+          dealerAceIs11 = false;
+        } else
+          dealer+=cards.get(draw).value;
+        dealersHand.add(cards.get(draw));
+        print("\nDealer draws: "+cards.get(draw).value);
+        cards.remove(draw);
+        print("\nDealers hand: "+dealer);
+        redraw();
+      }
+      if (dealer==21)
+      {
+        dealerWin = true;
+        bet = 0;
+        gameOver = true;
+      } else if (dealer>player&&dealer<21)
+      {
+        print("\nDealer Wins!");
+        dealerWin = true;
+        gameOver = true;
+        bet = 0;
+      } else if (player==dealer&&player<21)
+      {
+        print("\nDraw!");
+        gameOver = true;
+        winnings = bet;
+        money+=winnings;
+        noWIn = true;
+        bet = 0;
+      } else
+      {
+        print("\nPlayer Wins!");
+        gameOver = true;
+        winnings = bet*2;
+        money+=winnings;
+        playerWin = true;
+        bet = 0;
+      }
     }
   }
 }
@@ -300,8 +297,7 @@ void newGame()
     aceIs11=true;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
-  }
-  else
+  } else
   {
     player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
@@ -314,52 +310,50 @@ void newGame()
   draw = floor(random(cards.size()));
   if (cards.get(draw).value==1)
   {
-    if(player<=10)
+    if (player<=10)
     {
       player+=11;
       aceIs11 =true;
       playersHand.add(cards.get(draw));
       cards.remove(draw);
-    }
-    else
-    rando = 0;
-  }
-  else
+    } else
+      rando = 0;
+  } else
   {
     player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
   }
+  if (player == 21)
+  {
+    isTurn = false;
+    play();
+  } 
   draw = floor(random(cards.size()));
-  if(cards.get(draw).value==1)
+  if (cards.get(draw).value==1)
   {
     dealer+=11;
-  dealerAceIs11 = true;
-  }
-  else
+    dealerAceIs11 = true;
+  } else
     dealer+=cards.get(draw).value;
   dealersHand.add(cards.get(draw));
   cards.remove(draw);
-  if (player == 21)
-    {
-      isTurn = false;
-      gameOver = true;
-      play();
-    } 
   if (player>21)
     bust = true;
   print("\nPlayers hand: "+player);
   gameOn = true;
-  
-    if(dealer+faceDown==21)
-    {
-      play();
-    }
+
+  if (dealer+faceDown==21)
+  {
+    play();
+  }
 }
 void clear()
 {
+  bet = 0;
   player = 0;
   dealer = 0;
+  winnings = 0;
   while (cards.size()>0)
     cards.remove(0);
   while (dealersHand.size()>0)
