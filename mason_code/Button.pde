@@ -14,9 +14,9 @@ class Button{
     if(over()){
   fill(255-r,255-g,255-b);
     }
-    rect(x, y, 100, 30);
+    rect(x, y, 120, 30);
     fill(0);
-    text(label, x+30, y + 20);
+    text(label, x+20, y + 20);
   }
   boolean over(){
     if(mouseX >= x && mouseY >= y && mouseX <= x + 100 && mouseY <= y + 30){

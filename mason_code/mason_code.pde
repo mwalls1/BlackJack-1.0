@@ -5,16 +5,17 @@ int rando;
 boolean aceIs11 = false;
 boolean dealerAceIs11 = false;
 boolean cosmic = false;
+boolean hasHit = false;
 int winnings;
 String filePath = dataPath("ace.png");
+Button doubleDown;
 Button hit;
 Button stay;
 Button replay;
 Button bet5;
-String hh = "+";
 Button bet10;
 Button bet15;
-int money = 100;
+int money = 305;
 int bet=0;
 boolean madeBet = false;
 boolean bust = false;
@@ -35,11 +36,12 @@ void setup()
 {
   size(1700, 1000);
   hit = new Button(50, 50, "Hit");
-  stay = new Button(300, 50, "Stay");
+  stay = new Button(250, 50, "Stay");
   replay = new Button(700, 50, "Replay");
   bet5 = new Button(50, 200, "Bet $5");
   bet10 = new Button(150, 200, "Bet $10");
   bet15 = new Button(250, 200, "Bet $15");
+  doubleDown = new Button(450,50,"Double Down");
 }
 void draw()
 {
@@ -47,6 +49,7 @@ void draw()
   background(r, g, b);
   paintPlayer();
   paintDealer();
+  doubleDown.draw();
   hit.draw();
   stay.draw();
   replay.draw();
@@ -66,12 +69,12 @@ void draw()
   if (playerWin==true)
   {
     text("Player Wins!", 500, 150);
-    text(hh+winnings, 245, 170);
+    text("+"+winnings, 245, 170);
   } else if (dealerWin==true)
     text("Dealer Wins!", 500, 150);
   else if (noWIn==true)
   {
-    text(hh+winnings, 245, 170);
+    text("+"+winnings, 245, 170);
     text("Its a draw!", 500, 150);
   }
 }
@@ -103,8 +106,35 @@ void mousePressed()
     newGame();
     redraw();
   }
+  if(!hasHit&&doubleDown.over()&&madeBet==true&&bust==false&&isTurn == true)
+  {
+    money-=bet;
+    bet=bet*2;
+    draw = floor(random(cards.size()));
+    
+    if (player == 10&&cards.get(draw).value==1)
+    {
+      player = 21;
+    } else if (aceIs11==true&&player+cards.get(draw).value>21)
+    {
+      player+=cards.get(draw).value-10;
+      aceIs11 = false;
+    } else if (player<10&&cards.get(draw).value==1)
+    {
+      player+=11;
+      aceIs11  =true;
+    } else 
+    player+=cards.get(draw).value;
+    playersHand.add(cards.get(draw));
+    cards.remove(draw);
+    isTurn = false;
+    if(player>21)
+    bust = true;
+    play();
+  }
   if (hit.over()&&isTurn == true&&bust==false&&madeBet == true)
   {
+    hasHit = true;
     draw = floor(random(cards.size()));
     if (player == 10&&cards.get(draw).value==1)
     {
@@ -169,8 +199,6 @@ void play()
       dealerWin = true;
     } else if (isTurn == false&&bust == false&& gameOver == false)
     {
-      if (faceDown==1)
-        faceDown=11;
       dealer+=faceDown;
       dealersHand.add(faceDownCard);
       print("\nDealers hand: "+dealer);
@@ -208,7 +236,8 @@ void play()
         money+=winnings;
         noWIn = true;
         bet = 0;
-      } else
+      }
+      else
       {
         print("\nPlayer Wins!");
         gameOver = true;
@@ -304,13 +333,25 @@ void newGame()
     cards.remove(draw);
   }
   draw = floor(random(cards.size()));
+  if(cards.get(draw).value == 1)
+  {
+    faceDown  = 11;
+    dealerAceIs11 = true;
+  }
+  else
   faceDown = cards.get(draw).value;
   faceDownCard = cards.get(draw);
   cards.remove(draw);
   draw = floor(random(cards.size()));
   if (cards.get(draw).value==1)
   {
-    if (player<10)
+    if(aceIs11)
+    {
+      player+=1;
+      playersHand.add(cards.get(draw));
+      cards.remove(draw);
+    }
+    else if (player<10)
     {
       player+=11;
       aceIs11 =true;
@@ -329,6 +370,11 @@ void newGame()
     player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
+    if(player == 21)
+    {
+      isTurn = false;
+      play();
+    }
   }
   draw = floor(random(cards.size()));
   if (cards.get(draw).value==1)
@@ -370,5 +416,6 @@ void clear()
   noWIn = false; 
   gameOver = false; 
   gameOn = false;
+  hasHit=false;
   dealerAceIs11 = false;
 }
