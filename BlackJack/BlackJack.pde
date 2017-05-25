@@ -9,24 +9,26 @@ Button bet5;
 boolean hasHit = false;
 Button bet10;
 Button bet15;
+Button quit;
 void setup()
 {
-  size(1500, 800);
+  fullScreen();
   user = new Player();
   dealer = new Dealer();
   decks = new Deck();
   hit = new Button(50, 50, "Hit");
   stay = new Button(200, 50, "Stay");
-  replay = new Button(700, 50, "Replay");
+  replay = new Button(500, 50, "Replay");
   bet5 = new Button(20, 200, "Bet $5");
   bet10 = new Button(150, 200, "Bet $10");
   bet15 = new Button(280, 200, "Bet $15");
   doubleDown = new Button(350,50,"Double Down");
+  quit = new Button(650,50,"Quit");
 }
 void draw()
 {
-  background(20,100,20);
   textSize(14);
+  background(20,100,20);
   doubleDown.draw();
   hit.draw();
   stay.draw();
@@ -34,12 +36,15 @@ void draw()
   bet5.draw();
   bet10.draw();
   bet15.draw();
+  quit.draw();
   textSize(20);
   fill(255,255,255);
-  text("Player: "+user.getHand(), 10, 150);
-  text("Dealer: "+dealer.getHand(), 120, 150);
-  text("Cash: $"+money, 230, 150);
-  text("Bet: $"+bet, 370, 150);
+  text("Players Hand:",50,360);
+  text("Dealers Hand:",1100,360);
+  text("Player: "+user.getHand(), 30, 150);
+  text("Dealer: "+dealer.getHand(), 130, 150);
+  text("Cash: $"+money, 240, 150);
+  text("Bet: $"+bet, 360, 150);
   textSize(14);
   user.paint();
   dealer.paint();
@@ -109,6 +114,10 @@ void mousePressed()
   {
     hasHit=false;
     decks.resetGame(dealer,user);
+  }
+  if(quit.over())
+  {
+    exit();
   }
 }
 void gameOver()

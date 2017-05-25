@@ -6,7 +6,7 @@ public class Card
   {
     value = a;
     image = b;
-    image.resize(80,180);
+    image.resize(150,300);
   }
   private int getValue()
   {

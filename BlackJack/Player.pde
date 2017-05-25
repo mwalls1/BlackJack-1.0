@@ -61,7 +61,7 @@ public class Player
   {
     for (int i =0; i<playerCards.size(); i++)
     {
-      image(playerCards.get(i).image, 100+i*110, 400);
+      image(playerCards.get(i).image, 50+i*160, 400);
     }
   }
   private void placeBet(int a)
