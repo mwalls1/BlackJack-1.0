@@ -110,6 +110,13 @@ public class Deck
       }
       else
       {
+        if(b.getHand()>21)
+        {
+          a.setWin(true);
+          isOver = true;
+        }
+        else
+        {
         while(a.getHand()<17)
         {
           a.addCard(usedDeck.remove(usedDeck.size()-1));
@@ -142,6 +149,7 @@ public class Deck
           isOver = true;
         }
       }
+     }
   }
   private boolean gameOver()
   {

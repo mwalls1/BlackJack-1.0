@@ -26,9 +26,6 @@ public class Player
         playerCards.add(a);
         hand+=11;
         playerAce = true;
-        if(hand==21)
-          isTurn = false;
-
     } else if(isTurn)
     {
       if(hand>10&&a.getValue() == 1)
@@ -47,7 +44,6 @@ public class Player
         hand+=a.getValue();
               playerCards.add(a);
       }
-
     }
   }
   private int getHand()

@@ -11,21 +11,22 @@ Button bet10;
 Button bet15;
 void setup()
 {
-  size(1700, 1000);
+  size(1500, 800);
   user = new Player();
   dealer = new Dealer();
   decks = new Deck();
   hit = new Button(50, 50, "Hit");
-  stay = new Button(250, 50, "Stay");
+  stay = new Button(200, 50, "Stay");
   replay = new Button(700, 50, "Replay");
-  bet5 = new Button(50, 200, "Bet $5");
+  bet5 = new Button(20, 200, "Bet $5");
   bet10 = new Button(150, 200, "Bet $10");
-  bet15 = new Button(250, 200, "Bet $15");
-  doubleDown = new Button(450,50,"Double Down");
+  bet15 = new Button(280, 200, "Bet $15");
+  doubleDown = new Button(350,50,"Double Down");
 }
 void draw()
 {
-  background(100);
+  background(20,100,20);
+  textSize(14);
   doubleDown.draw();
   hit.draw();
   stay.draw();
@@ -33,42 +34,53 @@ void draw()
   bet5.draw();
   bet10.draw();
   bet15.draw();
+  textSize(20);
+  fill(255,255,255);
   text("Player: "+user.getHand(), 10, 150);
-  text("Dealer: "+dealer.getHand(), 100, 150);
-  text("Cash: $"+money, 200, 150);
-  text("Bet: $"+bet, 350, 150);
+  text("Dealer: "+dealer.getHand(), 120, 150);
+  text("Cash: $"+money, 230, 150);
+  text("Bet: $"+bet, 370, 150);
+  textSize(14);
   user.paint();
   dealer.paint();
   if(decks.gameOver())
   {
     if(user.hasWon())
     {
+      fill(0,255,0);
+      textSize(20);
       text("Player Wins!", 500, 150);
-      text("+"+user.getMoneyWon(), 233, 170);
+      text("+"+user.getMoneyWon(), 295, 175);
     }
     else if(dealer.hasWon())
+    {
+      fill(255,0,0);
+      textSize(20);
       text("Dealer Wins!", 500, 150);
+    }
     else
     {
+      fill(40,40,40);
+      textSize(20);
       text("Its a draw!", 500, 150);
-      text("+"+user.getMoneyWon(), 233, 170);
+      text("+"+user.getMoneyWon(), 295, 175);
     }
   }
 }
 void mousePressed()
 {
-  if(!user.hasBet()&&bet5.over())
+  if(!user.hasBet()&&bet5.over()&&user.getMoney()>=5)
   {
     user.placeBet(5);
     decks.deal(user,dealer);
   }
-  if(!user.hasBet()&&bet10.over())
+  if(!user.hasBet()&&bet10.over()&&user.getMoney()>=10)
   {
     user.placeBet(10);
     decks.deal(user,dealer);
     gameOver();
   }
-  if(!user.hasBet()&&bet15.over())
+  if(!user.hasBet()&&bet15.over()&&user.getMoney()>=15)
   {
     user.placeBet(15);
     decks.deal(user,dealer);
@@ -85,7 +97,6 @@ void mousePressed()
     user.placeBet(user.getBet());
     user.addCard(decks.drawCard());
     hasHit=true;
-    user.setTurn(false);
     gameOver();
     decks.dealerTurn(dealer,user);
   }
@@ -112,6 +123,7 @@ void gameOver()
   else if(user.getHand()>21)
    {
      user.setTurn(false);
+     user.setWin(false);
      dealer.setWin(true);
      decks.setState(true);
    }
