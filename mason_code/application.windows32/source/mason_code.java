@@ -96,27 +96,27 @@ public void mousePressed()
   int draw;
   if (madeBet == false&&bet5.over()&&money>=5)
   {
-    newGame();
     bet+=5;
     money-=5;
     madeBet = true;
     isTurn = true;
+    newGame();
     redraw();
   } else if (madeBet == false&&bet10.over()&&money>=10)
   {
-    newGame();
     bet+=10;
     money-=10;
     madeBet = true;
     isTurn = true;
+    newGame();
     redraw();
   } else if (madeBet == false&&bet15.over()&&money>=15)
   {
-    newGame();
     bet+=15;
     money-=15;
     madeBet = true;
     isTurn = true;
+    newGame();
     redraw();
   }
   if (hit.over()&&isTurn == true&&bust==false&&madeBet == true)
@@ -179,11 +179,11 @@ public void play()
     { 
       dealersHand.add(faceDownCard);
       dealer = 21;
+      isTurn=false;
       gameOver = true;
       bet = 0;
       dealerWin = true;
-    }
-    else if (isTurn == false&&bust == false&& gameOver == false)
+    } else if (isTurn == false&&bust == false&& gameOver == false)
     {
       if (faceDown==1)
         faceDown=11;
@@ -326,25 +326,26 @@ public void newGame()
   draw = floor(random(cards.size()));
   if (cards.get(draw).value==1)
   {
-    if (player<=10)
+    if (player<10)
     {
       player+=11;
       aceIs11 =true;
       playersHand.add(cards.get(draw));
       cards.remove(draw);
     } else
-      rando = 0;
+    {
+      player = 21;
+      playersHand.add(cards.get(draw));
+      cards.remove(draw);
+      isTurn = false;
+      play();
+    }
   } else
   {
     player+=cards.get(draw).value;
     playersHand.add(cards.get(draw));
     cards.remove(draw);
   }
-  if (player == 21)
-  {
-    isTurn = false;
-    play();
-  } 
   draw = floor(random(cards.size()));
   if (cards.get(draw).value==1)
   {
