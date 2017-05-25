@@ -21,7 +21,7 @@ public class Player
   }
   private void addCard(Card a)
   {
-    if (isTurn&&a.getValue() == 1&&!playerAce&&hand<10)
+    if (isTurn&&a.getValue() == 1&&!playerAce&&hand<=10)
     {
         playerCards.add(a);
         hand+=11;
