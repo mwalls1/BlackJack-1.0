@@ -97,7 +97,7 @@ void mousePressed()
     hasHit=true;
     gameOver();
   }
-  if(user.turnState()&&doubleDown.over()&&!hasHit)
+  if(user.turnState()&&doubleDown.over()&&!hasHit&&user.getMoney()>=user.getBet())
   {
     user.placeBet(user.getBet());
     user.addCard(decks.drawCard());
