@@ -16,14 +16,14 @@ void setup()
   user = new Player();
   dealer = new Dealer();
   decks = new Deck();
-  hit = new Button(50, 50, "Hit");
-  stay = new Button(200, 50, "Stay");
-  replay = new Button(500, 50, "Replay");
+  hit = new Button(20, 50, "Hit");
+  stay = new Button(150, 50, "Stay");
+  replay = new Button(280, 50, "Replay");
   bet5 = new Button(20, 200, "Bet $5");
   bet10 = new Button(150, 200, "Bet $10");
   bet15 = new Button(280, 200, "Bet $15");
-  doubleDown = new Button(350,50,"Double Down");
-  quit = new Button(650,50,"Quit");
+  doubleDown = new Button(410,50,"Double Down");
+  quit = new Button(abs(displayWidth-200),50,"Quit");
 }
 void draw()
 {
@@ -39,9 +39,9 @@ void draw()
   quit.draw();
   textSize(20);
   fill(255,255,255);
-  text("Players Hand:",50,360);
-  text("Dealers Hand:",1100,360);
-  text("Player: "+user.getHand(), 30, 150);
+  text("Players Hand:",20,360);
+  text("Dealers Hand:",displayWidth/2,360);
+  text("Player: "+user.getHand(), 20, 150);
   text("Dealer: "+dealer.getHand(), 130, 150);
   text("Cash: $"+money, 240, 150);
   text("Bet: $"+bet, 360, 150);

@@ -23,26 +23,24 @@ public class Player
   {
     if (isTurn&&a.getValue() == 1&&!playerAce&&hand<=10)
     {
-        playerCards.add(a);
-        hand+=11;
-        playerAce = true;
-    } else if(isTurn)
+      playerCards.add(a);
+      hand+=11;
+      playerAce = true;
+    } else if (isTurn)
     {
-      if(hand>10&&a.getValue() == 1)
+      if (hand>10&&a.getValue() == 1)
       {
         hand+=1;
-              playerCards.add(a);
-      }
-      else if(playerAce&&a.getValue()+hand>21)
+        playerCards.add(a);
+      } else if (playerAce&&a.getValue()+hand>21)
       {
         hand+=a.getValue()-10;
         playerCards.add(a);
         playerAce = false;
-      }
-      else
+      } else
       {
         hand+=a.getValue();
-              playerCards.add(a);
+        playerCards.add(a);
       }
     }
   }
@@ -59,10 +57,10 @@ public class Player
   }
   private void paint()
   {
-    for (int i =0; i<playerCards.size(); i++)
-    {
-      image(playerCards.get(i).image, 50+i*160, 400);
-    }
+      for (int i =0; i<playerCards.size(); i++)
+      {
+        image(playerCards.get(i).image, 20+i*((displayWidth/12)+10), 400);
+      }
   }
   private void placeBet(int a)
   {
@@ -89,7 +87,7 @@ public class Player
   }
   private void setWin(boolean a)
   {
-     win = a;
+    win = a;
   }
   private boolean hasWon()
   {
@@ -115,6 +113,6 @@ public class Player
   }
   private int getMoneyWon()
   {
-     return moneyWon;
+    return moneyWon;
   }
 }

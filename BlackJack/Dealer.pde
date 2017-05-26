@@ -67,7 +67,7 @@ public class Dealer
   {
     for (int i =0; i<dealerCards.size(); i++)
     {
-      image(dealerCards.get(i).image, 1100+i*160, 400);
+      image(dealerCards.get(i).image, displayWidth/2+i*((displayWidth/12)+10), 400);
     }
   }
   private void setWin(boolean a)
